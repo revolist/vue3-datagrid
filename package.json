@@ -10,6 +10,7 @@
   "keywords": [
     "spreadsheet",
     "vue",
+    "vue 3",
     "datagrid",
     "revogrid",
     "excel",
@@ -18,17 +19,18 @@
     "virtual",
     "virtual grid",
     "datalist",
-    "rangeedit"
+    "rangeedit",
+    "grouping"
   ],
   "author": "revolist",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/revolist/vue-datagrid.git"
+    "url": "git+https://github.com/revolist/vue3-datagrid.git"
   },
   "bugs": {
-    "url": "https://github.com/revolist/vue-datagrid/issues"
+    "url": "https://github.com/revolist/vue3-datagrid/issues"
   },
-  "homepage": "https://github.com/revolist/vue-datagrid#readme",
+  "homepage": "https://github.com/revolist/vue3-datagrid#readme",
   "license": "MIT",
   "devDependencies": {
     "@vue/compiler-sfc": "^3.0.5",

@@ -1,13 +1,12 @@
 import { App, defineAsyncComponent } from "vue";
-import * as loader from '@revolist/revogrid/loader';
-import {RevoGrid} from './revogrid';
+import * as loader from "@revolist/revogrid/loader";
+import {RevoGrid} from "./revogrid";
 import vueTemplate, {vueTemplateConstructor} from "./vue-template";
 import vueEditor from "./vue-editor";
 
 let isDefined = false;
 export const VGrid = defineAsyncComponent(
   () => new Promise<typeof RevoGrid>((resolve) => {
-    console.log('compo');
     if (!isDefined && loader?.defineCustomElements) {
       return loader.defineCustomElements().then(() => resolve(RevoGrid));
     }
