@@ -1,6 +1,3 @@
-/* eslint-disable */
-/* tslint:disable */
-/* auto-generated vue proxies */
 import { VNode, defineComponent, getCurrentInstance, h, inject, ref, Ref } from 'vue';
 
 export interface InputProps extends Object {

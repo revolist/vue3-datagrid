@@ -76,7 +76,7 @@ export default {
   components: {
     VGrid
   },
-  template: '<div class="tile large"><v-grid :source="source" resize="true" :columns="headers" :editors="gridEditors" theme="material"/></div>'
+  template: '<div class="tile large"><v-grid :source="source" resize="true" :columns="headers" theme="material" :editors="gridEditors"/></div>'
 }
 </script>
 

@@ -49,6 +49,7 @@ export const RevoGrid = /*@__PURE__*/ defineContainer<JSX.RevoGrid>('revo-grid',
   'beforeColumnsSet',
   'afterColumnsSet',
   'beforeFilterApply',
+  'beforeFilterTrimmed',
   'viewportScroll',
   'beforeExport',
   'beforeEditStart'
@@ -66,11 +67,11 @@ export const RevogrData = /*@__PURE__*/ defineContainer<JSX.RevogrData>('revogr-
   'range',
   'canDrag',
   'rowClass',
-  'colData',
   'rowSelectionStore',
   'viewportRow',
   'viewportCol',
   'dimensionRow',
+  'colData',
   'dataStore',
   'dragStartCell'
 ]);

@@ -9,7 +9,7 @@ interface VueElement extends HTMLElement {
 export const vueTemplateConstructor =
     (vueConstructor: DefineComponent, e: HTMLElement|null, p: Record<string, any>) => {
         if (!e) {
-            return;
+            return null;
         }
         let el: VueElement|undefined;
         if (e?.childNodes.length) {

@@ -2,16 +2,12 @@
   "compilerOptions": {
     "outDir": "./dist/",
     "allowSyntheticDefaultImports": true,
-    "declaration": true,
+    "declaration": false,
     "experimentalDecorators": true,
-    "lib": [
-      "dom",
-      "es2017"
-    ],
+    "lib": ["dom", "es2017"],
     "moduleResolution": "node",
-    "module": "es2015",
-    "target": "es5",
-    "strict": true,
+    "module": "esnext",
+    "target": "es2017",
     "jsx": "react",
     "jsxFactory": "h",
     "sourceMap": true,
