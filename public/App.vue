@@ -14,7 +14,7 @@
 
 <script lang="ts">
 import {defineComponent, ref} from 'vue';
-import {Components} from "@revolist/revogrid";
+import {Components} from '@revolist/revogrid';
 import VGrid, { VGridVueEditor, VGridVueTemplate } from '@revolist/vue-datagrid';
 import Editor from './Editor.vue';
 import Cell from './Cell.vue';
