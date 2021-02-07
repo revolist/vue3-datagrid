@@ -36,7 +36,7 @@ export const vueTemplateConstructor =
         return vueInstance;
     };
 
-const vueTemplate = (vueConstructor: DefineComponent) => {
+const vueTemplate = (vueConstructor: any) => {
     return (h: RevoGrid.HyperFunc<VNode>, p: RevoGrid.ColumnDataSchemaModel) => <span ref={(el) => vueTemplateConstructor(vueConstructor, el as HTMLElement, p)}></span>;
 };
 

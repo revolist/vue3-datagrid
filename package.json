@@ -1,6 +1,6 @@
 {
   "name": "@revolist/vue3-datagrid",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Vue 3 data grid spreadsheet",
   "main": "dist/vgrid.js",
   "scripts": {

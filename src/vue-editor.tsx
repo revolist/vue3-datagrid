@@ -1,12 +1,11 @@
-import { RevoGrid } from '@revolist/revogrid/dist/types/interfaces';
-import { DefineComponent } from 'vue';
+import {RevoGrid} from "@revolist/revogrid/dist/types/interfaces";
 import VueEditorAdapter from './vue-editor-adapter';
+
   
-const vueEditor = (vueConstructor: DefineComponent) => {
-    return (column: RevoGrid.ColumnDataSchemaModel, save: Function, close: Function) => {
-        const adapter = new VueEditorAdapter(vueConstructor, column, save, close);
-        return adapter;
-    };
+const vueEditor = (vueConstructor: any) => {
+    return function(column: RevoGrid.ColumnDataSchemaModel, save: Function, close: Function) {
+        return new VueEditorAdapter(vueConstructor, column, save, close);
+    }
 };
 
 export default vueEditor;

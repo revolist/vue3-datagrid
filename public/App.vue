@@ -1,83 +1,46 @@
 <template>
-    <div class="tile large"><v-grid :source="source" resize="true" :columns="headers" :editors="gridEditors" theme="material"/></div>
+    <div class="tile large">
+      <v-grid
+        ref="grid"
+        :source="source"
+        resize="true"
+        :columns="headers"
+        :editors="gridEditors"
+        theme="material"
+        @cell="onCell"/>
+    </div>
 </template>
 
 
 <script lang="ts">
-import {createApp, DefineComponent, defineComponent} from 'vue';
-import VGrid, { VGridVueTemplate, VGridVueEditor } from '../src/vgrid';
+import {defineComponent, ref} from 'vue';
+import {Components} from "@revolist/revogrid";
+import VGrid, { VGridVueEditor, VGridVueTemplate } from '@revolist/vue-datagrid';
+import Editor from './Editor.vue';
+import Cell from './Cell.vue';
+import {generateFakeDataObject} from './dataService';
 
-const NewComponent: DefineComponent = defineComponent({
-  props: ['rowIndex'],
-  template: '<span>{{rowIndex}}</span>'
-});
 
-const NewEditor: DefineComponent = defineComponent({
-  props: ['rowIndex', 'model', 'save', 'close'],
-  template: '<button @click="onBtn">I am vue</button>',
-  methods: {
-    onBtn(e: MouseEvent) {
-      e.stopPropagation();
-      if (typeof this.close === 'function') {
-        (this.close as () => void)();
-      }
-    }
-  }
-});
-
-function generateHeader(index: number) {
-  const asciiFirstLetter = 65;
-  const lettersCount = 26;
-  let div = index + 1;
-  let label = '';
-  let pos: number;
-  while (div > 0) {
-      pos = (div - 1) % lettersCount;
-      label = String.fromCharCode(asciiFirstLetter + pos) + label;
-      div = parseInt(((div - pos) / lettersCount).toString(), 10);
-  }
-  return label.toLowerCase();
-}
-
-function generateFakeDataObject(rowsNumber: number, colsNumber: number) {
-  const result: Record<any, any> = [];
-  const columns: Record<number, any> = {};
-  const all = colsNumber * rowsNumber;
-  for (let j = 0; j < all; j++) {
-      let col = j%colsNumber;
-      let row = j/colsNumber|0;
-      if (!result[row]) {
-          result[row] = {};
-      }
-      if (!columns[col]) {
-          columns[col] = {
-              name: generateHeader(col),
-              prop: col,
-          };
-          if (col === 0) {
-            columns[col].cellTemplate = VGridVueTemplate(NewComponent);
-            columns[col].editor = 'button';
-          }
-      }
-      result[row][col] = row + ':' + col;
-  }
-  let headers = Object.keys(columns).map((k) => columns[parseInt(k, 10)]);
-  return {
-    source: result,
-    headers
-  };
-}
-
-export default {
+export default defineComponent({
   data() {
-    const editor = VGridVueEditor(NewEditor);
-    return { ...generateFakeDataObject(100, 5), gridEditors: { button: editor },};
+    const cellTemplate = VGridVueTemplate(Cell);
+    return { ...generateFakeDataObject(100, 25, cellTemplate)};
   },
   components: {
     VGrid
   },
-  template: '<div class="tile large"><v-grid :source="source" resize="true" :columns="headers" theme="material" :editors="gridEditors"/></div>'
-}
+  setup() {
+    const button = VGridVueEditor(Editor);
+    const gridEditors = { button };
+    const grid = ref<Components.RevoGrid>(null);
+    return { grid, gridEditors };
+  },
+  methods: {
+    onCell(e: CustomEvent) {
+      console.log('c', e.detail, this.grid.source);
+    }
+  }
+});
 </script>
 
 <style lang="scss">
