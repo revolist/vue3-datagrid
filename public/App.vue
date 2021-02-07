@@ -32,7 +32,7 @@ export default defineComponent({
   setup() {
     const button = VGridVueEditor(Editor);
     const gridEditors = { button };
-    const grid = ref<Components.RevoGrid>(null);
+    const grid = ref<Components.RevoGrid|null>(null);
     return { grid, gridEditors };
   },
   methods: {
