@@ -50,6 +50,8 @@ export const RevoGrid = /*@__PURE__*/ defineContainer<JSX.RevoGrid>('revo-grid',
   'afterColumnsSet',
   'beforeFilterApply',
   'beforeFilterTrimmed',
+  'beforeTrimmed',
+  'afterTrimmed',
   'viewportScroll',
   'beforeExport',
   'beforeEditStart'
