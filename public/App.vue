@@ -2,17 +2,19 @@
     <div class="tile large">
       <v-grid
         ref="grid"
+        readonly="false"
         :source="source"
-        resize="true"
+        resize="false"
         :columns="headers"
         :editors="gridEditors"
         theme="material"
-        @cell="onCell"/>
+        @beforefocuslost="test"/>
     </div>
 </template>
 
 
 <script lang="ts">
+// beforeCellFocus
 import {defineComponent, ref} from 'vue';
 import {Components} from '@revolist/revogrid';
 import VGrid, { VGridVueEditor, VGridVueTemplate } from '@revolist/vue-datagrid';
@@ -36,8 +38,8 @@ export default defineComponent({
     return { grid, gridEditors };
   },
   methods: {
-    onCell(e: CustomEvent) {
-      console.log('c', e.detail, this.grid.source);
+    test(e: CustomEvent) {
+      console.log(e);
     }
   }
 });
