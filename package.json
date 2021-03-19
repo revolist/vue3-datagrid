@@ -51,11 +51,7 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
-<<<<<<< HEAD
-    "@revolist/revogrid": "^3.0.0-beta.8",
+    "@revolist/revogrid": "^3.0.0-beta.10",
     "@stencil/core": "^2.4.0"
-=======
-    "@revolist/revogrid": "^2.9.6"
->>>>>>> f6806bb5b2ed324a173aa549b54efc3cdb483107
   }
 }
