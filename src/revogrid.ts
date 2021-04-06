@@ -33,6 +33,7 @@ export const RevoGrid = /*@__PURE__*/ defineContainer<JSX.RevoGrid>('revo-grid',
   'trimmedRows',
   'exporting',
   'grouping',
+  'stretch',
   'beforeedit',
   'beforerangeedit',
   'afteredit',
@@ -49,6 +50,7 @@ export const RevoGrid = /*@__PURE__*/ defineContainer<JSX.RevoGrid>('revo-grid',
   'beforesourceset',
   'aftersourceset',
   'beforecolumnsset',
+  'beforecolumnapplied',
   'aftercolumnsset',
   'beforefilterapply',
   'beforefiltertrimmed',
@@ -118,7 +120,7 @@ export const RevogrHeader = /*@__PURE__*/ defineContainer<JSX.RevogrHeader>('rev
   'columnFilter',
   'initialHeaderClick',
   'headerResize',
-  'headerDblClick'
+  'headerdblClick'
 ]);
 
 
