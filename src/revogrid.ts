@@ -181,6 +181,7 @@ export const RevogrViewportScroll = /*@__PURE__*/ defineContainer<JSX.RevogrView
   'contentWidth',
   'contentHeight',
   'scrollViewport',
-  'resizeViewport'
+  'resizeViewport',
+  'scrollchange'
 ]);
 
