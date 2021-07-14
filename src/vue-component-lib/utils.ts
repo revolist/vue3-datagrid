@@ -10,6 +10,10 @@ const ROUTER_LINK_VALUE = 'routerLink';
 const NAV_MANAGER = 'navManager';
 const ROUTER_PROP_REFIX = 'router';
 
+// because vue 3.1 sets all unspecified properties to undefined we use this value as a default and filter it out.
+// see vuejs/vue-next#3889
+const EMPTY_SENTINEL: unknown = {};
+
 interface NavManager<T = any> {
   navigate: (options: T) => void;
 }
@@ -39,7 +43,7 @@ const getElementClasses = (ref: Ref<HTMLElement | undefined>, componentClasses: 
 * options for the component such as router or v-model
 * integrations.
 */
-export const defineContainer = <Props>(name: string, componentProps: string[] = [], componentOptions: ComponentOptions = {}) => {
+export const defineContainer = <Props>(name: string, [...componentProps]: string[] = [], componentOptions: ComponentOptions = {}) => {
   const { modelProp, modelUpdateEvent } = componentOptions;
 
   /**
@@ -108,17 +112,22 @@ export const defineContainer = <Props>(name: string, componentProps: string[] = 
       }
 
       let propsToAdd = {
-        ...props,
         ref: containerRef,
         class: getElementClasses(containerRef, classes),
         onClick: handleClick,
         onVnodeBeforeMount: (modelUpdateEvent) ? onVnodeBeforeMount : undefined
       };
 
+      for (const [prop, value] of Object.entries(props)) {
+        if (value !== EMPTY_SENTINEL) {
+          propsToAdd[prop] = value;
+        }
+      }
+
       if (modelProp) {
         propsToAdd = {
           ...propsToAdd,
-          [modelProp]: props.hasOwnProperty('modelValue') ? props.modelValue : modelPropValue
+          [modelProp]: props.modelValue !== EMPTY_SENTINEL ? props.modelValue : modelPropValue
         }
       }
 
@@ -127,10 +136,15 @@ export const defineContainer = <Props>(name: string, componentProps: string[] = 
   });
 
   Container.displayName = name;
-  Container.props = [...componentProps, ROUTER_LINK_VALUE];
+  componentProps.push(ROUTER_LINK_VALUE);
   if (modelProp) {
-    Container.props.push(MODEL_VALUE);
+    componentProps.push(MODEL_VALUE);
     Container.emits = [UPDATE_VALUE_EVENT, modelUpdateEvent];
+  }
+
+  Container.props = {};
+  for (const componentProp of componentProps) {
+	Container.props[componentProp] = { default: EMPTY_SENTINEL };
   }
 
   return Container;
