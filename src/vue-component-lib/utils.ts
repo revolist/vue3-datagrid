@@ -12,7 +12,7 @@ const ROUTER_PROP_REFIX = 'router';
 
 // because vue 3.1 sets all unspecified properties to undefined we use this value as a default and filter it out.
 // see vuejs/vue-next#3889
-const EMPTY_SENTINEL: unknown = {};
+const EMPTY_SENTINEL: unknown = Symbol();
 
 interface NavManager<T = any> {
   navigate: (options: T) => void;
