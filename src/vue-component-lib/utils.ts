@@ -1,7 +1,11 @@
 import { VNode, defineComponent, getCurrentInstance, h, inject, ref, Ref } from 'vue';
 
+// because vue 3.1 sets all unspecified properties to undefined we use this value as a default and filter it out.
+// see vuejs/vue-next#3889
+const EMPTY_SENTINEL = Symbol();
+
 export interface InputProps extends Object {
-  modelValue: string | boolean;
+  modelValue: string | boolean | typeof EMPTY_SENTINEL;
 }
 
 const UPDATE_VALUE_EVENT = 'update:modelValue';
@@ -9,10 +13,6 @@ const MODEL_VALUE = 'modelValue';
 const ROUTER_LINK_VALUE = 'routerLink';
 const NAV_MANAGER = 'navManager';
 const ROUTER_PROP_REFIX = 'router';
-
-// because vue 3.1 sets all unspecified properties to undefined we use this value as a default and filter it out.
-// see vuejs/vue-next#3889
-const EMPTY_SENTINEL: unknown = Symbol();
 
 interface NavManager<T = any> {
   navigate: (options: T) => void;
