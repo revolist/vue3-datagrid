@@ -11,7 +11,12 @@ function generateHeader(index: number) {
     }
     return label.toLowerCase();
   }
-  
+
+function naturalSort(prop,a,b) {
+
+  return a[prop].localeCompare(b[prop],"en",{numeric:true})
+}
+
 export function generateFakeDataObject(rowsNumber: number, colsNumber: number, cellTemplate: any) {
     const result: Record<any, any> = [];
     const columns: Record<number, any> = {};
@@ -26,6 +31,8 @@ export function generateFakeDataObject(rowsNumber: number, colsNumber: number, c
             columns[col] = {
                 name: generateHeader(col),
                 prop: col,
+                sortable: true,
+                cellCompare: (col % 2) == 0 ? naturalSort : undefined,
             };
             if (col === 0) {
               columns[col].cellTemplate = cellTemplate;
