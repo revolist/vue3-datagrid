@@ -28,6 +28,7 @@ export default class VueEditorAdapter {
         return <span ref={(el) => {
           this.vueEl = vueTemplateConstructor(this.VueEditorConstructor, el as HTMLElement, {
             ...this.editCell,
+            column: this.column,
             save: this.save,
             close: this.close
         })}}/>;
