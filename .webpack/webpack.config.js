@@ -12,12 +12,12 @@ module.exports = {
     libraryTarget: 'umd',
     umdNamedDefine: true
   },
-  externals: {
-    vue: 'vue',
-    '@revolist/revogrid': '@revolist/revogrid',
-    '@revolist/revogrid/loader': '@revolist/revogrid/loader',
-    '@stencil/core': '@stencil/core'
-  },
+  externals: [
+    'vue',
+    '@revolist/revogrid',
+    /^@revolist\/revogrid\//,
+    '@stencil/core',
+  ],
   resolve: {
     extensions: [ '.tsx', '.ts', '.js' ],
   },
