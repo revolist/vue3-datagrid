@@ -7,6 +7,7 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, '../dist'),
+    publicPath: 'none',
     filename: '[name].js',
     library: 'VGrid',
     libraryTarget: 'umd',
