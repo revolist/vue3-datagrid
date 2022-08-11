@@ -30,6 +30,7 @@ export const RevoGrid = /*@__PURE__*/ defineContainer<JSX.RevoGrid>('revo-grid',
   'rowClass',
   'autoSizeColumn',
   'filter',
+  'canMoveColumns',
   'trimmedRows',
   'exporting',
   'grouping',
@@ -58,7 +59,8 @@ export const RevoGrid = /*@__PURE__*/ defineContainer<JSX.RevoGrid>('revo-grid',
   'aftertrimmed',
   'viewportscroll',
   'beforeexport',
-  'beforeeditstart'
+  'beforeeditstart',
+  'aftercolumnresize'
 ]);
 
 
@@ -94,9 +96,12 @@ export const RevogrEdit = /*@__PURE__*/ defineContainer<JSX.RevogrEdit>('revogr-
 
 export const RevogrFilterPanel = /*@__PURE__*/ defineContainer<JSX.RevogrFilterPanel>('revogr-filter-panel', [
   'uuid',
+  'filterItems',
   'filterTypes',
   'filterNames',
   'filterEntities',
+  'filterCaptions',
+  'disableDynamicFiltering',
   'filterChange'
 ]);
 
@@ -119,7 +124,7 @@ export const RevogrHeader = /*@__PURE__*/ defineContainer<JSX.RevogrHeader>('rev
   'colData',
   'columnFilter',
   'initialHeaderClick',
-  'headerResize',
+  'headerresize',
   'headerdblClick'
 ]);
 
@@ -159,6 +164,18 @@ export const RevogrOverlaySelection = /*@__PURE__*/ defineContainer<JSX.RevogrOv
   'focusCell',
   'internalSelectionChanged',
   'internalRangeDataApply'
+]);
+
+
+export const RevogrRowHeaders = /*@__PURE__*/ defineContainer<JSX.RevogrRowHeaders>('revogr-row-headers', [
+  'height',
+  'dataPorts',
+  'headerProp',
+  'uiid',
+  'resize',
+  'rowHeaderColumn',
+  'scrollViewport',
+  'elementToScroll'
 ]);
 
 
