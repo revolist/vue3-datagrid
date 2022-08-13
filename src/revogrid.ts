@@ -8,7 +8,7 @@ import type { JSX } from '@revolist/revogrid';
 
 
 
-export const RevoGrid = /*@__PURE__*/ defineContainer<JSX.RevoGrid>('revo-grid', [
+export const RevoGrid = /*@__PURE__*/ defineContainer<JSX.RevoGrid>('revo-grid', undefined, [
   'rowHeaders',
   'frameSize',
   'rowSize',
@@ -64,13 +64,13 @@ export const RevoGrid = /*@__PURE__*/ defineContainer<JSX.RevoGrid>('revo-grid',
 ]);
 
 
-export const RevogrClipboard = /*@__PURE__*/ defineContainer<JSX.RevogrClipboard>('revogr-clipboard', [
+export const RevogrClipboard = /*@__PURE__*/ defineContainer<JSX.RevogrClipboard>('revogr-clipboard', undefined, [
   'copyRegion',
   'pasteRegion'
 ]);
 
 
-export const RevogrData = /*@__PURE__*/ defineContainer<JSX.RevogrData>('revogr-data', [
+export const RevogrData = /*@__PURE__*/ defineContainer<JSX.RevogrData>('revogr-data', undefined, [
   'readonly',
   'range',
   'canDrag',
@@ -85,7 +85,7 @@ export const RevogrData = /*@__PURE__*/ defineContainer<JSX.RevogrData>('revogr-
 ]);
 
 
-export const RevogrEdit = /*@__PURE__*/ defineContainer<JSX.RevogrEdit>('revogr-edit', [
+export const RevogrEdit = /*@__PURE__*/ defineContainer<JSX.RevogrEdit>('revogr-edit', undefined, [
   'editCell',
   'column',
   'editor',
@@ -94,7 +94,7 @@ export const RevogrEdit = /*@__PURE__*/ defineContainer<JSX.RevogrEdit>('revogr-
 ]);
 
 
-export const RevogrFilterPanel = /*@__PURE__*/ defineContainer<JSX.RevogrFilterPanel>('revogr-filter-panel', [
+export const RevogrFilterPanel = /*@__PURE__*/ defineContainer<JSX.RevogrFilterPanel>('revogr-filter-panel', undefined, [
   'uuid',
   'filterItems',
   'filterTypes',
@@ -106,14 +106,14 @@ export const RevogrFilterPanel = /*@__PURE__*/ defineContainer<JSX.RevogrFilterP
 ]);
 
 
-export const RevogrFocus = /*@__PURE__*/ defineContainer<JSX.RevogrFocus>('revogr-focus', [
+export const RevogrFocus = /*@__PURE__*/ defineContainer<JSX.RevogrFocus>('revogr-focus', undefined, [
   'selectionStore',
   'dimensionRow',
   'dimensionCol'
 ]);
 
 
-export const RevogrHeader = /*@__PURE__*/ defineContainer<JSX.RevogrHeader>('revogr-header', [
+export const RevogrHeader = /*@__PURE__*/ defineContainer<JSX.RevogrHeader>('revogr-header', undefined, [
   'viewportCol',
   'dimensionCol',
   'selectionStore',
@@ -129,7 +129,7 @@ export const RevogrHeader = /*@__PURE__*/ defineContainer<JSX.RevogrHeader>('rev
 ]);
 
 
-export const RevogrOrderEditor = /*@__PURE__*/ defineContainer<JSX.RevogrOrderEditor>('revogr-order-editor', [
+export const RevogrOrderEditor = /*@__PURE__*/ defineContainer<JSX.RevogrOrderEditor>('revogr-order-editor', undefined, [
   'parent',
   'dimensionRow',
   'dimensionCol',
@@ -142,7 +142,7 @@ export const RevogrOrderEditor = /*@__PURE__*/ defineContainer<JSX.RevogrOrderEd
 ]);
 
 
-export const RevogrOverlaySelection = /*@__PURE__*/ defineContainer<JSX.RevogrOverlaySelection>('revogr-overlay-selection', [
+export const RevogrOverlaySelection = /*@__PURE__*/ defineContainer<JSX.RevogrOverlaySelection>('revogr-overlay-selection', undefined, [
   'readonly',
   'range',
   'canDrag',
@@ -167,7 +167,7 @@ export const RevogrOverlaySelection = /*@__PURE__*/ defineContainer<JSX.RevogrOv
 ]);
 
 
-export const RevogrRowHeaders = /*@__PURE__*/ defineContainer<JSX.RevogrRowHeaders>('revogr-row-headers', [
+export const RevogrRowHeaders = /*@__PURE__*/ defineContainer<JSX.RevogrRowHeaders>('revogr-row-headers', undefined, [
   'height',
   'dataPorts',
   'headerProp',
@@ -179,7 +179,7 @@ export const RevogrRowHeaders = /*@__PURE__*/ defineContainer<JSX.RevogrRowHeade
 ]);
 
 
-export const RevogrScrollVirtual = /*@__PURE__*/ defineContainer<JSX.RevogrScrollVirtual>('revogr-scroll-virtual', [
+export const RevogrScrollVirtual = /*@__PURE__*/ defineContainer<JSX.RevogrScrollVirtual>('revogr-scroll-virtual', undefined, [
   'dimension',
   'viewportStore',
   'dimensionStore',
@@ -187,14 +187,14 @@ export const RevogrScrollVirtual = /*@__PURE__*/ defineContainer<JSX.RevogrScrol
 ]);
 
 
-export const RevogrTempRange = /*@__PURE__*/ defineContainer<JSX.RevogrTempRange>('revogr-temp-range', [
+export const RevogrTempRange = /*@__PURE__*/ defineContainer<JSX.RevogrTempRange>('revogr-temp-range', undefined, [
   'selectionStore',
   'dimensionRow',
   'dimensionCol'
 ]);
 
 
-export const RevogrViewportScroll = /*@__PURE__*/ defineContainer<JSX.RevogrViewportScroll>('revogr-viewport-scroll', [
+export const RevogrViewportScroll = /*@__PURE__*/ defineContainer<JSX.RevogrViewportScroll>('revogr-viewport-scroll', undefined, [
   'contentWidth',
   'contentHeight',
   'scrollViewport',
