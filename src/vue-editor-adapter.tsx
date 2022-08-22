@@ -20,8 +20,10 @@ export default class VueEditorAdapter {
 
     // optional, called after editor destroyed
     disconnectedCallback() {
-        this.vueEl?.$destroy();
-        this.vueEl = undefined;
+        if (this.vueEl) {
+          this.vueEl.destroy();
+          this.vueEl = undefined;
+        }
     }
 
     render(h: RevoGrid.HyperFunc<VNode>) {
