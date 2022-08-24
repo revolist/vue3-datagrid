@@ -12,7 +12,8 @@ export default class VueEditorAdapter {
         private VueEditorConstructor: DefineComponent,
         public column: RevoGrid.ColumnDataSchemaModel,
         private save: Function,
-        private close: Function
+        private close: Function,
+        private appContext: Object
     ) {}
 
     // optional, called after editor rendered
@@ -20,8 +21,10 @@ export default class VueEditorAdapter {
 
     // optional, called after editor destroyed
     disconnectedCallback() {
-        this.vueEl?.$destroy();
-        this.vueEl = undefined;
+        if (this.vueEl) {
+          this.vueEl.destroy();
+          this.vueEl = undefined;
+        }
     }
 
     render(h: RevoGrid.HyperFunc<VNode>) {
@@ -31,6 +34,6 @@ export default class VueEditorAdapter {
             column: this.column,
             save: this.save,
             close: this.close
-        })}}/>;
+        }, this.appContext)}}/>;
     }
 }
