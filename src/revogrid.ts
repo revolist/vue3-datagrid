@@ -5,8 +5,9 @@ import { defineContainer } from './vue-component-lib/utils';
 
 import type { JSX } from '@revolist/revogrid';
 
+import { RevoGrid as RevoGridComponent } from '@revolist/revogrid/custom-element/';
 
-
+export {RevoGridComponent};
 
 export const RevoGrid = /*@__PURE__*/ defineContainer<JSX.RevoGrid>('revo-grid', undefined, [
   'rowHeaders',
@@ -40,6 +41,7 @@ export const RevoGrid = /*@__PURE__*/ defineContainer<JSX.RevoGrid>('revo-grid',
   'afteredit',
   'beforeautofill',
   'beforeaange',
+  'afterfocus',
   'roworderchanged',
   'beforesourcesortingapply',
   'beforesortingapply',
@@ -107,9 +109,12 @@ export const RevogrFilterPanel = /*@__PURE__*/ defineContainer<JSX.RevogrFilterP
 
 
 export const RevogrFocus = /*@__PURE__*/ defineContainer<JSX.RevogrFocus>('revogr-focus', undefined, [
+  'dataStore',
+  'colData',
   'selectionStore',
   'dimensionRow',
-  'dimensionCol'
+  'dimensionCol',
+  'afterfocus'
 ]);
 
 
