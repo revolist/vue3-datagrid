@@ -3,7 +3,7 @@ import { VNode } from '@revolist/revogrid/dist/types/stencil-public-runtime';
 import { ComponentPublicInstance, createVNode, DefineComponent, render, getCurrentInstance } from "vue";
 
 
-interface VueElement extends HTMLElement {
+export interface VueElement extends HTMLElement {
     _vnode?: ComponentPublicInstance<any>;
 }
 export const vueTemplateConstructor =
