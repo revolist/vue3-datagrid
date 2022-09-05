@@ -7,7 +7,7 @@ interface VueElement extends HTMLElement {
     _vnode?: ComponentPublicInstance<any>;
 }
 export const vueTemplateConstructor =
-    (vueConstructor: DefineComponent, e: HTMLElement|null, p: Record<string, any>, appContext: Object | any) => {
+    (vueConstructor: DefineComponent, el: VueElement|null, p: Record<string, any>, appContext: any) => {
     if (!el) {
       return null;
     }
