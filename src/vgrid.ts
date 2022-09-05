@@ -1,6 +1,6 @@
-import { App, defineAsyncComponent } from "vue";
-import {RevoGrid} from "./revogrid";
-import vueTemplate, {vueTemplateConstructor} from "./vue-template";
+import { App } from "vue";
+import { RevoGrid } from "./revogrid";
+import vueTemplate, { vueTemplateConstructor } from "./vue-template";
 import vueEditor from "./vue-editor";
 
 export const VGrid = RevoGrid;
@@ -13,8 +13,8 @@ export const VGridPlugin = {
       return;
     }
     installed = true;
-    app.component('vue-data-grid', VGrid);
-  }
+    app.component("vue-data-grid", VGrid);
+  },
 };
 
 // Vue template wrapper for virtual nodes
@@ -26,6 +26,4 @@ export const VGridVueTemplateConstructor = vueTemplateConstructor;
 // Vue editor wrapper
 export const VGridVueEditor = vueEditor;
 
-
 export default VGrid;
-
