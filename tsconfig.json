@@ -3,7 +3,6 @@
     "outDir": "./dist/",
     "baseUrl": "./",
     "allowSyntheticDefaultImports": true,
-    "declaration": true,
     "experimentalDecorators": true,
     "lib": ["dom", "es2017"],
     "moduleResolution": "node",

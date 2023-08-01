@@ -1,10 +1,9 @@
 <template>
     <div class="tile large">
       <v-grid
-        ref="grid"
-        readonly="false"
+        :readonly="false"
         :source="source"
-        resize="false"
+        :resize="false"
         :columns="headers"
         :editors="gridEditors"
         theme="material"
@@ -16,8 +15,7 @@
 <script lang="ts">
 // beforeCellFocus
 import {defineComponent, ref} from 'vue';
-import {Components} from '@revolist/revogrid';
-import VGrid, { VGridVueEditor, VGridVueTemplate } from '@revolist/vue-datagrid';
+import VGrid, { VGridVueEditor, VGridVueTemplate } from '../src/vgrid';
 import Editor from './Editor.vue';
 import Cell from './Cell.vue';
 import {generateFakeDataObject} from './dataService';
@@ -34,8 +32,7 @@ export default defineComponent({
   setup() {
     const button = VGridVueEditor(Editor);
     const gridEditors = { button };
-    const grid = ref<Components.RevoGrid|null>(null);
-    return { grid, gridEditors };
+    return { gridEditors };
   },
   methods: {
     test(e: CustomEvent) {
