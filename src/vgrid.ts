@@ -1,14 +1,20 @@
-import { App } from "vue";
+import { App, defineAsyncComponent } from "vue";
 import { RevoGrid } from "./revogrid";
 import vueTemplate, { vueTemplateConstructor } from "./vue-template";
 import vueEditor from "./vue-editor";
+import { defineCustomElements } from "@revolist/revogrid/loader";
 
-export const VGrid = RevoGrid;
+const defined = defineCustomElements();
+export const VGrid = defineAsyncComponent(async () => {
+  await defined;
+  return RevoGrid;
+});
 
 let installed = false;
 
 export const VGridPlugin = {
-  install(app: App) {
+  async install(app: App) {
+    await defined;
     if (installed) {
       return;
     }

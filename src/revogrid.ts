@@ -5,10 +5,6 @@ import { defineContainer } from './vue-component-lib/utils';
 
 import type { JSX } from '@revolist/revogrid';
 
-import { defineCustomElements } from '@revolist/revogrid/loader';
-
-await defineCustomElements();
-
 export const RevoGrid = /*@__PURE__*/ defineContainer<JSX.RevoGrid>('revo-grid', undefined, [
   'rowHeaders',
   'frameSize',
