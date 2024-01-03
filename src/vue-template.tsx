@@ -35,7 +35,8 @@ export const vueTemplateConstructor =
 const vueTemplate = (vueConstructor: any) => {
     const current = getCurrentInstance();
     const appContext = current?.appContext;
-    return (h: RevoGrid.HyperFunc<VNode>, p: RevoGrid.ColumnDataSchemaModel) => <span ref={(el) => vueTemplateConstructor(vueConstructor, el as HTMLElement, p, appContext)}></span>;
+    const uuid =  'rvgrid-span-' + Date.now().toString(36) + Math.random().toString(36).substring(2);
+    return (h: RevoGrid.HyperFunc<VNode>, p: RevoGrid.ColumnDataSchemaModel) => <span key={uuid} ref={(el) => vueTemplateConstructor(vueConstructor, el as HTMLElement, p, appContext)}></span>;
 };
 
 export default vueTemplate;
