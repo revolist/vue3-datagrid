@@ -17,7 +17,7 @@
 // beforeCellFocus
 import {defineComponent, ref} from 'vue';
 import {Components} from '@revolist/revogrid';
-import VGrid, { VGridVueEditor, VGridVueTemplate } from '@revolist/vue-datagrid';
+import VGrid, { VGridVueEditor, VGridVueTemplate } from '@revolist/vue3-datagrid';
 import Editor from './Editor.vue';
 import Cell from './Cell.vue';
 import {generateFakeDataObject} from './dataService';

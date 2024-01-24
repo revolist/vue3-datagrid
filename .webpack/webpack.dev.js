@@ -1,50 +1,50 @@
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { VueLoaderPlugin } = require('vue-loader')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const { VueLoaderPlugin } = require("vue-loader");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = {
-  mode: 'development',
+  mode: "development",
   entry: {
-    app: './public/index.ts'
+    app: "./public/index.ts",
   },
-  devtool: 'inline-source-map',
+  devtool: "inline-source-map",
   devServer: {
-    port: 3332
+    port: 3332,
   },
   output: {
-    path: path.resolve(__dirname, '../distServe'),
-    filename: '[name].js',
-    libraryTarget: 'umd',
-    umdNamedDefine: true
+    path: path.resolve(__dirname, "../distServe"),
+    filename: "[name].js",
+    libraryTarget: "umd",
+    umdNamedDefine: true,
   },
   plugins: [
     new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
     new VueLoaderPlugin(),
     new HtmlWebpackPlugin({
-      title: 'Development',
-      template: './public/index.html',
-      appMountId: 'app',
+      title: "Development",
+      template: "./public/index.html",
+      appMountId: "app",
       inject: true,
-      "exJs": [], //"dist/vgrid.js"
+      exJs: [], //"dist/vgrid.js"
     }),
   ],
   resolve: {
-    extensions: [ '.tsx', '.ts', '.js', '.vue' ],
+    extensions: [".tsx", ".ts", ".js", ".vue"],
     alias: {
-      'vue$': 'vue/dist/vue.esm-bundler.js',
-      '@revolist/vue-datagrid': path.resolve(__dirname, '../dist/vgrid')
-    }
+      vue$: "vue/dist/vue.esm-bundler.js",
+      "@revolist/vue3-datagrid": path.resolve(__dirname, "../dist/"),
+    },
   },
   module: {
     rules: [
       {
         test: /\.vue$/,
-        use: 'vue-loader'
+        use: "vue-loader",
       },
       {
         test: /\.tsx?$/,
-        loader: 'ts-loader',
+        loader: "ts-loader",
         options: {
           appendTsSuffixTo: [/\.vue$/],
         },
@@ -53,15 +53,15 @@ module.exports = {
       {
         test: /\.scss$/,
         use: [
-          'vue-style-loader',
+          "vue-style-loader",
           {
-            loader: 'css-loader',
+            loader: "css-loader",
             options: {
-              esModule: false
-            }
+              esModule: false,
+            },
           },
-          'sass-loader'
-        ]
+          "sass-loader",
+        ],
       },
     ],
   },

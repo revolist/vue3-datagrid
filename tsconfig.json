@@ -16,7 +16,7 @@
     "importHelpers": true,
     "isolatedModules": true,
     "paths": {
-      "@revolist/vue-datagrid": ["src/vgrid"]
+      "@revolist/vue3-datagrid": ["src/index"]
     }
   },
   "include": [
