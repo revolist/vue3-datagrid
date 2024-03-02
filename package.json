@@ -1,6 +1,6 @@
 {
   "name": "@revolist/vue3-datagrid",
-  "version": "4.0.0-next.0",
+  "version": "4.0.0-next.1",
   "description": "Vue 3 DataGrid Spreadsheet",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

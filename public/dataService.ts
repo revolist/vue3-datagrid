@@ -18,7 +18,7 @@ function naturalSort(prop,a,b) {
 }
 
 export function generateFakeDataObject(rowsNumber: number, colsNumber: number, cellTemplate: any) {
-    const result: Record<any, any> = [];
+    const result: any[] = [];
     const columns: Record<number, any> = {};
     const all = colsNumber * rowsNumber;
     for (let j = 0; j < all; j++) {
