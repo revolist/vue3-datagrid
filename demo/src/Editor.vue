@@ -1,19 +1,22 @@
 <template>
-  <button @click="onBtn">I am vue</button>
+  <button @click="onBtn">Finish edit</button>
 </template>
 <script lang="ts">
-import {defineComponent} from 'vue';
+import { defineComponent } from 'vue';
 export default defineComponent({
   props: ['rowIndex', 'model', 'save', 'close'],
   methods: {
     onBtn(e: MouseEvent) {
-      const event = new CustomEvent('cell', { bubbles: true, detail: { row: this.model}});
+      const event = new CustomEvent('cell', {
+        bubbles: true,
+        detail: { row: this.model },
+      });
       this.$el.dispatchEvent(event);
       e.stopPropagation();
       if (typeof this.close === 'function') {
         (this.close as () => void)();
       }
-    }
-  }
+    },
+  },
 });
 </script>

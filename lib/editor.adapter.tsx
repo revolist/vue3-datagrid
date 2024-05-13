@@ -3,9 +3,9 @@ import {
   ColumnDataSchemaModel,
   HyperFunc,
   VNode,
-} from "@revolist/revogrid";
-import { ComponentPublicInstance, DefineComponent } from "vue";
-import { vueTemplateConstructor } from "./vue-template";
+} from '@revolist/revogrid';
+import { ComponentInternalInstance, ComponentPublicInstance, DefineComponent } from 'vue';
+import { VueTemplateConstructor } from './renderer';
 
 export default class VueEditorAdapter {
   public element: Element | null = null;
@@ -17,7 +17,7 @@ export default class VueEditorAdapter {
     public column: ColumnDataSchemaModel,
     private save: Function,
     private close: Function,
-    private appContext: Object
+    private vInstance: ComponentInternalInstance | null,
   ) {}
 
   // optional, called after editor rendered
@@ -34,8 +34,8 @@ export default class VueEditorAdapter {
   render(h: HyperFunc<VNode>) {
     return (
       <span
-        ref={(el) => {
-          this.vueEl = vueTemplateConstructor(
+        ref={el => {
+          this.vueEl = VueTemplateConstructor(
             this.VueEditorConstructor,
             el as HTMLElement,
             {
@@ -44,7 +44,7 @@ export default class VueEditorAdapter {
               save: this.save,
               close: this.close,
             },
-            this.appContext
+            this.vInstance,
           );
         }}
       />

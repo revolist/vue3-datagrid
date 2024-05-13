@@ -32,10 +32,10 @@ export function generateFakeDataObject(rowsNumber: number, colsNumber: number, c
                 name: generateHeader(col),
                 prop: col,
                 sortable: true,
+                cellTemplate,
                 cellCompare: (col % 2) == 0 ? naturalSort : undefined,
             };
             if (col === 0) {
-              columns[col].cellTemplate = cellTemplate;
               columns[col].editor = 'button';
             }
         }

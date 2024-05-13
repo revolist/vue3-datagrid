@@ -9,18 +9,19 @@
     "moduleResolution": "node",
     "module": "esnext",
     "target": "es2017",
-    "jsx": "react",
+    "jsx": "preserve",
     "jsxFactory": "h",
     "sourceMap": true,
+    "skipLibCheck": true,
     "strictNullChecks": false,
     "importHelpers": true,
     "isolatedModules": true,
     "paths": {
-      "@revolist/vue3-datagrid": ["src/index"]
+      "@revolist/vue3-datagrid": ["./"]
     }
   },
   "include": [
-    "src",
+    "lib",
     "*.d.ts"
   ],
   "exclude": [

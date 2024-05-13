@@ -1,6 +1,6 @@
 // @ts-nocheck
 // It's easier and safer for Volar to disable typechecking and let the return type inference do its job.
-import { VNode, defineComponent, getCurrentInstance, h, inject, ref, Ref } from 'vue';
+import { defineComponent, getCurrentInstance, h, inject, ref, Ref, withDirectives } from 'vue';
 
 export interface InputProps<T> {
   modelValue?: T;
@@ -53,16 +53,13 @@ const getElementClasses = (
  * to customElements.define. Only set if `includeImportCustomElements: true` in your config.
  * @prop modelProp - The prop that v-model binds to (i.e. value)
  * @prop modelUpdateEvent - The event that is fired from your Web Component when the value changes (i.e. ionChange)
- * @prop externalModelUpdateEvent - The external event to fire from your Vue component when modelUpdateEvent fires. This is used for ensuring that v-model references have been
- * correctly updated when a user's event callback fires.
  */
 export const defineContainer = <Props, VModelType = string | number | boolean>(
   name: string,
   defineCustomElement: any,
   componentProps: string[] = [],
   modelProp?: string,
-  modelUpdateEvent?: string,
-  externalModelUpdateEvent?: string
+  modelUpdateEvent?: string
 ) => {
   /**
    * Create a Vue component wrapper around a Web Component.
@@ -78,29 +75,36 @@ export const defineContainer = <Props, VModelType = string | number | boolean>(
     let modelPropValue = props[modelProp];
     const containerRef = ref<HTMLElement>();
     const classes = new Set(getComponentClasses(attrs.class));
-    const onVnodeBeforeMount = (vnode: VNode) => {
-      // Add a listener to tell Vue to update the v-model
-      if (vnode.el) {
+
+    /**
+     * This directive is responsible for updating any reactive
+     * reference associated with v-model on the component.
+     * This code must be run inside of the "created" callback.
+     * Since the following listener callbacks as well as any potential
+     * event callback defined in the developer's app are set on
+     * the same element, we need to make sure the following callbacks
+     * are set first so they fire first. If the developer's callback fires first
+     * then the reactive reference will not have been updated yet.
+     */
+    const vModelDirective = {
+      created: (el: HTMLElement) => {
         const eventsNames = Array.isArray(modelUpdateEvent) ? modelUpdateEvent : [modelUpdateEvent];
         eventsNames.forEach((eventName: string) => {
-          vnode.el!.addEventListener(eventName.toLowerCase(), (e: Event) => {
-            modelPropValue = (e?.target as any)[modelProp];
-            emit(UPDATE_VALUE_EVENT, modelPropValue);
-
+          el.addEventListener(eventName.toLowerCase(), (e: Event) => {
             /**
-             * We need to emit the change event here
-             * rather than on the web component to ensure
-             * that any v-model bindings have been updated.
-             * Otherwise, the developer will listen on the
-             * native web component, but the v-model will
-             * not have been updated yet.
+             * Only update the v-model binding if the event's target is the element we are
+             * listening on. For example, Component A could emit ionChange, but it could also
+             * have a descendant Component B that also emits ionChange. We only want to update
+             * the v-model for Component A when ionChange originates from that element and not
+             * when ionChange bubbles up from Component B.
              */
-            if (externalModelUpdateEvent) {
-              emit(externalModelUpdateEvent, e);
+            if (e.target.tagName === el.tagName) {
+              modelPropValue = (e?.target as any)[modelProp];
+              emit(UPDATE_VALUE_EVENT, modelPropValue);
             }
           });
         });
-      }
+      },
     };
 
     const currentInstance = getCurrentInstance();
@@ -146,7 +150,6 @@ export const defineContainer = <Props, VModelType = string | number | boolean>(
         ref: containerRef,
         class: getElementClasses(containerRef, classes),
         onClick: handleClick,
-        onVnodeBeforeMount: modelUpdateEvent ? onVnodeBeforeMount : undefined,
       };
 
       /**
@@ -182,7 +185,12 @@ export const defineContainer = <Props, VModelType = string | number | boolean>(
         }
       }
 
-      return h(name, propsToAdd, slots.default && slots.default());
+      /**
+       * vModelDirective is only needed on components that support v-model.
+       * As a result, we conditionally call withDirectives with v-model components.
+       */
+      const node = h(name, propsToAdd, slots.default && slots.default());
+      return modelProp === undefined ? node : withDirectives(node, [[vModelDirective]]);
     };
   });
 
@@ -199,7 +207,7 @@ export const defineContainer = <Props, VModelType = string | number | boolean>(
 
     if (modelProp) {
       Container.props[MODEL_VALUE] = DEFAULT_EMPTY_PROP;
-      Container.emits = [UPDATE_VALUE_EVENT, externalModelUpdateEvent];
+      Container.emits = [UPDATE_VALUE_EVENT];
     }
   }
 

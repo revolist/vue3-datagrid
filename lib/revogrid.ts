@@ -50,7 +50,6 @@ export const RevoGrid = /*@__PURE__*/ defineContainer<JSX.RevoGrid>('revo-grid',
   'beforeange',
   'afterfocus',
   'roworderchanged',
-  'beforesourcesortingapply',
   'beforesortingapply',
   'beforesorting',
   'rowdragstart',
@@ -58,9 +57,9 @@ export const RevoGrid = /*@__PURE__*/ defineContainer<JSX.RevoGrid>('revo-grid',
   'beforecellfocus',
   'beforefocuslost',
   'beforesourceset',
-  'before-any-source',
+  'beforeanysource',
   'aftersourceset',
-  'after-any-source',
+  'afteranysource',
   'beforecolumnsset',
   'beforecolumnapplied',
   'aftercolumnsset',
@@ -74,39 +73,22 @@ export const RevoGrid = /*@__PURE__*/ defineContainer<JSX.RevoGrid>('revo-grid',
   'aftercolumnresize',
   'beforerowdefinition',
   'filterconfigchanged',
-  'rowheaderschanged'
-]);
-
-
-export const RevogrCell = /*@__PURE__*/ defineContainer<JSX.RevogrCell>('revogr-cell', undefined, [
-  'additionalData',
-  'columnService',
-  'providers',
-  'depth',
-  'rowIndex',
-  'rowStart',
-  'rowEnd',
-  'rowSize',
-  'colIndex',
-  'colStart',
-  'colEnd',
-  'colSize',
-  'before-cell-render',
-  'dragStartCell'
+  'rowheaderschanged',
+  'beforegridrender'
 ]);
 
 
 export const RevogrClipboard = /*@__PURE__*/ defineContainer<JSX.RevogrClipboard>('revogr-clipboard', undefined, [
   'readonly',
-  'pasteRegion',
   'beforepaste',
   'beforepasteapply',
+  'pasteregion',
   'afterpasteapply',
   'beforecut',
-  'clearRegion',
+  'clearregion',
   'beforecopy',
   'beforecopyapply',
-  'copyRegion'
+  'copyregion'
 ]);
 
 
@@ -122,8 +104,12 @@ export const RevogrData = /*@__PURE__*/ defineContainer<JSX.RevogrData>('revogr-
   'colData',
   'dataStore',
   'type',
+  'colType',
+  'jobsBeforeRender',
   'beforerowrender',
-  'afterrender'
+  'afterrender',
+  'beforecellrender',
+  'dragstartcell'
 ]);
 
 
@@ -133,8 +119,8 @@ export const RevogrEdit = /*@__PURE__*/ defineContainer<JSX.RevogrEdit>('revogr-
   'editor',
   'saveOnClose',
   'additionalData',
-  'cellEdit',
-  'closeEdit'
+  'celledit',
+  'closeedit'
 ]);
 
 
@@ -151,15 +137,15 @@ export const RevogrFilterPanel = /*@__PURE__*/ defineContainer<JSX.RevogrFilterP
 
 
 export const RevogrFocus = /*@__PURE__*/ defineContainer<JSX.RevogrFocus>('revogr-focus', undefined, [
+  'colType',
+  'rowType',
   'selectionStore',
   'dimensionRow',
   'dimensionCol',
   'dataStore',
   'colData',
-  'colType',
-  'rowType',
   'focusTemplate',
-  'before-focus-render',
+  'beforefocusrender',
   'beforescrollintoview',
   'afterfocus'
 ]);
@@ -169,7 +155,6 @@ export const RevogrHeader = /*@__PURE__*/ defineContainer<JSX.RevogrHeader>('rev
   'viewportCol',
   'dimensionCol',
   'selectionStore',
-  'parent',
   'groups',
   'groupingDepth',
   'readonly',
@@ -179,10 +164,10 @@ export const RevogrHeader = /*@__PURE__*/ defineContainer<JSX.RevogrHeader>('rev
   'columnFilter',
   'type',
   'additionalData',
-  'initialHeaderClick',
+  'beforeheaderclick',
   'headerresize',
-  'before-resize',
-  'headerdblClick'
+  'beforeheaderresize',
+  'headerdblclick'
 ]);
 
 
@@ -191,11 +176,11 @@ export const RevogrOrderEditor = /*@__PURE__*/ defineContainer<JSX.RevogrOrderEd
   'dimensionRow',
   'dimensionCol',
   'dataStore',
-  'internalRowDragStart',
-  'internalRowDragEnd',
-  'internalRowDrag',
-  'internalRowMouseMove',
-  'initialRowDropped'
+  'rowdragstartinit',
+  'rowdragendinit',
+  'rowdragmoveinit',
+  'rowdragmousemove',
+  'rowdragendinit'
 ]);
 
 
@@ -214,29 +199,29 @@ export const RevogrOverlaySelection = /*@__PURE__*/ defineContainer<JSX.RevogrOv
   'applyChangesOnClose',
   'additionalData',
   'isMobileDevice',
-  'internalCopy',
-  'internalPaste',
-  'internalCellEdit',
-  'beforeFocusCell',
-  'setEdit',
-  'before-apply-range',
-  'before-set-range',
-  'before-edit-render',
-  'setRange',
+  'beforecopyregion',
+  'beforepasteregion',
+  'celleditapply',
+  'beforecellfocusinit',
+  'setedit',
+  'beforeapplyrange',
+  'beforesetrange',
+  'beforeeditrender',
+  'setrange',
   'selectall',
-  'cancelEdit',
-  'setTempRange',
-  'applyFocus',
-  'focusCell',
-  'beforeRangeDataApply',
-  'internalSelectionChanged',
-  'beforeRangeCopyApply',
-  'internalRangeDataApply',
-  'rangeClipboardCopy',
-  'rangeClipboardPaste',
+  'canceledit',
+  'settemprange',
+  'applyfocus',
+  'focuscell',
+  'beforerangedataapply',
+  'selectionchangeinit',
+  'beforerangecopyapply',
+  'rangeeditapply',
+  'clipboardrangecopy',
+  'clipboardrangepaste',
   'beforekeydown',
   'beforekeyup',
-  'before-cell-save'
+  'beforecellsave'
 ]);
 
 
@@ -244,13 +229,13 @@ export const RevogrRowHeaders = /*@__PURE__*/ defineContainer<JSX.RevogrRowHeade
   'height',
   'dataPorts',
   'headerProp',
-  'uiid',
   'rowClass',
   'resize',
   'rowHeaderColumn',
   'additionalData',
-  'scrollViewport',
-  'elementToScroll'
+  'jobsBeforeRender',
+  'scrollview',
+  'ref'
 ]);
 
 
@@ -258,7 +243,7 @@ export const RevogrScrollVirtual = /*@__PURE__*/ defineContainer<JSX.RevogrScrol
   'dimension',
   'viewportStore',
   'dimensionStore',
-  'scrollVirtual'
+  'scrollvirtual'
 ]);
 
 
@@ -273,9 +258,15 @@ export const RevogrViewportScroll = /*@__PURE__*/ defineContainer<JSX.RevogrView
   'rowHeader',
   'contentWidth',
   'contentHeight',
-  'scrollViewport',
-  'resizeViewport',
+  'scrollviewport',
+  'resizeviewport',
   'scrollchange',
-  'silentScroll'
+  'scrollviewportsilent'
+]);
+
+
+export const VnodeHtml = /*@__PURE__*/ defineContainer<JSX.VnodeHtml>('vnode-html', undefined, [
+  'redraw',
+  'html'
 ]);
 
