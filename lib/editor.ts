@@ -10,9 +10,6 @@ import VueEditorAdapter from './editor.adapter';
  * @returns editor constructor
  */
 const Editor = (vueConstructor: any): EditorCtr => {
-  const current = getCurrentInstance();
-  const appContext = current?.appContext;
-
   /**
    * Editor constructor wrapper
    * @param column column data to which editor is bound
