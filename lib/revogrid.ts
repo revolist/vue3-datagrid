@@ -180,7 +180,7 @@ export const RevogrOrderEditor = /*@__PURE__*/ defineContainer<JSX.RevogrOrderEd
   'rowdragendinit',
   'rowdragmoveinit',
   'rowdragmousemove',
-  'rowdragendinit'
+  'rowdropinit'
 ]);
 
 
