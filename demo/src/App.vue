@@ -18,18 +18,18 @@ import { provide, readonly, ref } from 'vue';
 /**
  * Import Revogrid, Renderer and Editor for Vue
  */
-import Grid, { VGridVueEditor, VGridVueTemplate } from '@revolist/vue3-datagrid';
+import Grid, { VGridVueEditor, VGridVueTemplate, type Editors } from '@revolist/vue3-datagrid';
 
 import Editor from './Editor.vue';
 import Cell from './Cell.vue';
 import { generateFakeDataObject } from './dataService';
-import { Editors } from '@revolist/revogrid';
 
 const count = ref(0)
 provide('read-only-count', readonly(count));
 
 const cellTemplate = VGridVueTemplate(Cell);
 const { source, headers } = { ...generateFakeDataObject(1000, 1000, cellTemplate) };
+
 const button = VGridVueEditor(Editor);
 const gridEditors: Editors = { button };
 

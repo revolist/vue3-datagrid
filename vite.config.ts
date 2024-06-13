@@ -34,22 +34,26 @@ export default defineConfig({
         'vue',
         /node_modules/,
         /@revolist\/revogrid/,
+        '@revolist/revogrid/loader',
       ],
       output: {
         exports: 'named',
         // Provide global variables to use in the UMD build for externalized deps
         globals: {
           vue: 'Vue',
+          '@revolist/revogrid': 'Revogrid',
+          '@revolist/revogrid/loader': 'RevogridLoader',
         },
       },
     },
   },
-  server: {
-    open: '/demo/index.html',
-  },
-  resolve: {
-    alias: {
-      '@revolist/vue3-datagrid': resolve(__dirname, './lib'),
-    }
-  }
+  // this is for local development
+  // server: {
+  //   open: '/demo/index.html',
+  // },
+  // resolve: {
+  //   alias: {
+  //     '@revolist/vue3-datagrid': resolve(__dirname, './lib'),
+  //   }
+  // }
 });

@@ -5,9 +5,8 @@ import { defineContainer } from './vue-component-lib/utils';
 
 import type { JSX } from '@revolist/revogrid';
 
-import { defineCustomElements } from '@revolist/revogrid/loader';
 
-defineCustomElements();
+
 
 export const RevoGrid = /*@__PURE__*/ defineContainer<JSX.RevoGrid>('revo-grid', undefined, [
   'rowHeaders',
@@ -42,6 +41,7 @@ export const RevoGrid = /*@__PURE__*/ defineContainer<JSX.RevoGrid>('revo-grid',
   'disableVirtualX',
   'disableVirtualY',
   'jobsBeforeRender',
+  'registerVNode',
   'contentsizechanged',
   'beforeedit',
   'beforerangeedit',
@@ -74,7 +74,8 @@ export const RevoGrid = /*@__PURE__*/ defineContainer<JSX.RevoGrid>('revo-grid',
   'beforerowdefinition',
   'filterconfigchanged',
   'rowheaderschanged',
-  'beforegridrender'
+  'beforegridrender',
+  'aftergridinit'
 ]);
 
 
@@ -121,18 +122,6 @@ export const RevogrEdit = /*@__PURE__*/ defineContainer<JSX.RevogrEdit>('revogr-
   'additionalData',
   'celledit',
   'closeedit'
-]);
-
-
-export const RevogrFilterPanel = /*@__PURE__*/ defineContainer<JSX.RevogrFilterPanel>('revogr-filter-panel', undefined, [
-  'uuid',
-  'filterItems',
-  'filterTypes',
-  'filterNames',
-  'filterEntities',
-  'filterCaptions',
-  'disableDynamicFiltering',
-  'filterChange'
 ]);
 
 
@@ -258,6 +247,7 @@ export const RevogrViewportScroll = /*@__PURE__*/ defineContainer<JSX.RevogrView
   'rowHeader',
   'contentWidth',
   'contentHeight',
+  'colType',
   'scrollviewport',
   'resizeviewport',
   'scrollchange',

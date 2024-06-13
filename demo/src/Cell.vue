@@ -4,7 +4,7 @@
 
 <script lang="ts" setup>
 import { defineProps, ref, inject } from 'vue';
-import type { ColumnDataSchemaModel } from '@revolist/revogrid';
+import type { ColumnDataSchemaModel } from '@revolist/vue3-datagrid';
 
 const props = defineProps<ColumnDataSchemaModel>();
 const cell = ref<HTMLElement>();

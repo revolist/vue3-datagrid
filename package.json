@@ -2,13 +2,14 @@
   "name": "@revolist/vue3-datagrid",
   "version": "4.0.0",
   "description": "Vue 3 DataGrid Spreadsheet component with native Vue 3 cell render support",
-  "main": "./dist/vue3-datagrid.umd.js",
+  "main": "./dist/vue3-datagrid.umd.cjs",
   "module": "./dist/vue3-datagrid.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "import": "./dist/vue3-datagrid.js",
-      "require": "./dist/vue3-datagrid.umd.cjs"
+      "require": "./dist/vue3-datagrid.umd.cjs",
+      "types": "./dist/index.d.ts"
     }
   },
   "type": "module",
