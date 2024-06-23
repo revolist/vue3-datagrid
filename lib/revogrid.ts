@@ -79,21 +79,3 @@ export const RevoGrid = /*@__PURE__*/ defineContainer<JSX.RevoGrid>('revo-grid',
   'aftergridinit'
 ]);
 
-
-export const RevogrFilterPanel = /*@__PURE__*/ defineContainer<JSX.RevogrFilterPanel>('revogr-filter-panel', undefined, [
-  'uuid',
-  'filterItems',
-  'filterTypes',
-  'filterNames',
-  'filterEntities',
-  'filterCaptions',
-  'disableDynamicFiltering',
-  'filterChange'
-]);
-
-
-export const VnodeHtml = /*@__PURE__*/ defineContainer<JSX.VnodeHtml>('vnode-html', undefined, [
-  'redraw',
-  'html'
-]);
-
