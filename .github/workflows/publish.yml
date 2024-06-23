@@ -1,6 +1,10 @@
 name: Publish Package
 
 on:
+  push:
+    branches:
+      - main
+      - next
   workflow_dispatch:
 
 jobs:
