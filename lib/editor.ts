@@ -1,4 +1,4 @@
-import { ColumnDataSchemaModel, EditorCtr } from '@revolist/revogrid';
+import { ColumnDataSchemaModel, EditorCtr, SaveData } from '@revolist/revogrid';
 import { getCurrentInstance } from 'vue';
 import VueEditorAdapter from './editor.adapter';
 
@@ -6,8 +6,6 @@ import VueEditorAdapter from './editor.adapter';
  * Create editor constructor.
  * This function creates editor constructor by wrapping it with VueEditorAdapter
  * which is responsible for connecting editor with Vue lifecycle events
- * @param vueConstructor editor Vue constructor
- * @returns editor constructor
  */
 const Editor = (vueConstructor: any): EditorCtr => {
   /**
@@ -19,8 +17,8 @@ const Editor = (vueConstructor: any): EditorCtr => {
    */
   return function (
     column: ColumnDataSchemaModel,
-    save: Function,
-    close: Function,
+    save: (value: SaveData, preventFocus?: boolean) => void,
+    close: (focusNext?: boolean) => void,
   ) {
     return new VueEditorAdapter(
       vueConstructor,
@@ -29,7 +27,7 @@ const Editor = (vueConstructor: any): EditorCtr => {
       close,
       getCurrentInstance(),
     );
-  } as unknown as EditorCtr;
+  };
 };
 
 export default Editor;

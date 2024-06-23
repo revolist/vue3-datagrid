@@ -1,4 +1,4 @@
-import type { ColumnProp, ColumnRegular } from '@revolist/revogrid';
+import type { ColumnProp, ColumnRegular } from '@revolist/vue3-datagrid';
 
 function generateHeader(index: number) {
   const asciiFirstLetter = 65;

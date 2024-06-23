@@ -1,6 +1,6 @@
 {
   "name": "@revolist/vue3-datagrid",
-  "version": "4.0.0",
+  "version": "4.0.11",
   "description": "Vue 3 DataGrid Spreadsheet component with native Vue 3 cell render support",
   "main": "./dist/vue3-datagrid.umd.cjs",
   "module": "./dist/vue3-datagrid.js",
@@ -19,7 +19,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "release": "npm run build && npm publish --public --tag pre-release"
   },
   "keywords": [
     "revo-grid",
@@ -64,17 +65,17 @@
   "homepage": "https://github.com/revolist/revogrid#readme",
   "license": "MIT",
   "dependencies": {
-    "@stencil/core": "^4.17.1",
-    "@revolist/revogrid": "^4.0.0",
-    "vue": "^3.4.21"
+    "@revolist/revogrid": "4.0.11"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^5.0.4",
-    "@vitejs/plugin-vue-jsx": "^3.1.0",
+    "@vitejs/plugin-vue": "^5.0.5",
+    "@vitejs/plugin-vue-jsx": "^4.0.0",
     "typescript": "^5.2.2",
-    "vite": "^5.2.0",
-    "vite-plugin-dts": "^3.9.0",
-    "vue-tsc": "^2.0.14"
+    "@stencil/core": "^4.18.3",
+    "vite": "^5.3.1",
+    "vite-plugin-dts": "^3.9.1",
+    "vue-tsc": "^2.0.14",
+    "vue": "^3.4.29"
   },
   "publishConfig": {
     "access": "public"

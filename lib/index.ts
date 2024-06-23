@@ -1,5 +1,5 @@
 import { defineAsyncComponent } from 'vue';
-import { defineCustomElements , applyPolyfills} from '@revolist/revogrid/loader';
+import { defineCustomElements } from '@revolist/revogrid/loader';
 import { RevoGrid } from './revogrid';
 export type * from '@revolist/revogrid';
 
@@ -17,7 +17,6 @@ function checkPromise(obj: any): obj is Promise<void> {
 const defineWebcomponent: Promise<void> | void = defineCustomElements?.();
 
 export const VGrid = defineAsyncComponent(async () => {
-  await applyPolyfills();
   if (checkPromise(defineWebcomponent)) {
     await (defineWebcomponent as Promise<void>);
   }

@@ -9,7 +9,7 @@ import {
   VNode as VueVNode,
 } from 'vue';
 
-export interface VueElement extends HTMLElement {
+export interface VueElement extends Element {
   _vnode?: ComponentPublicInstance<any>;
 }
 
