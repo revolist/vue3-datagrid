@@ -1,7 +1,22 @@
-name: Release Package
+name: Release new version based on package.json
 
 on:
+  push:
+    branches:
+      - main
+      - next
   workflow_dispatch:
+    inputs:
+      prerelease:
+        description: 'Prerelease'
+        required: false
+        type: boolean
+        default: false
+      draft:
+        description: 'Draft'
+        required: false
+        type: boolean
+        default: false
 
 jobs:
   check-version:
@@ -13,6 +28,9 @@ jobs:
           ref: main
           path: ./actions
           token: ${{ secrets.REPO_TOKEN }}
-      - uses: ./actions/release-pkg
+      - name: Release package if new version
+        uses: ./actions/release-pkg
         with:
+          draft: ${{ github.event.inputs.draft || 'true' }}
+          prerelease: ${{ github.event.inputs.prerelease || 'false' }}
           token: ${{ secrets.GITHUB_TOKEN }}
