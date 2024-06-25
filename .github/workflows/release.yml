@@ -1,22 +1,11 @@
-name: Release new version based on package.json
+# Automatically release a new version of the package when a new version is created
+name: Auto Release
 
 on:
   push:
     branches:
       - main
       - next
-  workflow_dispatch:
-    inputs:
-      prerelease:
-        description: 'Prerelease'
-        required: false
-        type: boolean
-        default: false
-      draft:
-        description: 'Draft'
-        required: false
-        type: boolean
-        default: false
 
 jobs:
   release:
@@ -32,6 +21,7 @@ jobs:
       - name: Release package if new version
         uses: ./actions/release-pkg
         with:
-          draft: ${{ github.event.inputs.draft || 'true' }}
-          prerelease: ${{ github.event.inputs.prerelease || 'false' }}
+          draft: false
+          # if branch is next, set prerelease to true
+          prerelease: ${{ github.ref == 'refs/heads/next' }}
           token: ${{ secrets.GITHUB_TOKEN }}
