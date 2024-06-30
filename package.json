@@ -1,6 +1,6 @@
 {
   "name": "@revolist/vue3-datagrid",
-  "version": true,
+  "version": "4.0.20",
   "description": "Vue 3 DataGrid Spreadsheet component with native Vue 3 cell render support",
   "main": "./dist/vue3-datagrid.umd.cjs",
   "module": "./dist/vue3-datagrid.js",
@@ -65,7 +65,7 @@
   "homepage": "https://github.com/revolist/revogrid#readme",
   "license": "MIT",
   "dependencies": {
-    "@revolist/revogrid": true
+    "@revolist/revogrid": "4.0.20"
   },
   "devDependencies": {
     "@stencil/core": "^4.18.3",
