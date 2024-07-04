@@ -13,7 +13,16 @@ import {
 } from '@revolist/revogrid';
 import { VueTemplateConstructor } from './renderer';
 
-export default class VueEditorAdapter implements EditorBase {
+/**
+ * Data passed to editor
+ */
+export type EditorType = {
+  column: ColumnDataSchemaModel;
+  save: (value: SaveData, preventFocus?: boolean) => void;
+  close: (focusNext?: boolean) => void;
+} & Partial<EditCell>;
+
+export class VueEditorAdapter implements EditorBase {
   public element: Element | null = null;
   public editCell?: EditCell;
   private vueEl: ComponentPublicInstance<any> | undefined;
@@ -38,15 +47,16 @@ export default class VueEditorAdapter implements EditorBase {
   render(h: HyperFunc<VNode>) {
     return h('span', {
       ref: (el: Element) => {
+        const editorData: EditorType = {
+          ...this.editCell,
+          column: this.column,
+          save: this.save,
+          close: this.close,
+        };
         this.vueEl = VueTemplateConstructor(
           this.VueEditorConstructor,
           el,
-          {
-            ...this.editCell,
-            column: this.column,
-            save: this.save,
-            close: this.close,
-          },
+          editorData,
           this.vInstance,
         );
       },

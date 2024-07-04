@@ -1,13 +1,13 @@
-import { ColumnDataSchemaModel, EditorCtr, SaveData } from '@revolist/revogrid';
+import { ColumnDataSchemaModel, EditCell, EditorCtr, SaveData } from '@revolist/revogrid';
 import { getCurrentInstance } from 'vue';
-import VueEditorAdapter from './editor.adapter';
+import { VueEditorAdapter } from './editor.adapter';
 
 /**
  * Create editor constructor.
  * This function creates editor constructor by wrapping it with VueEditorAdapter
  * which is responsible for connecting editor with Vue lifecycle events
  */
-const Editor = (vueConstructor: any): EditorCtr => {
+export const Editor = (vueConstructor: any): EditorCtr => {
   /**
    * Editor constructor wrapper
    * @param column column data to which editor is bound
@@ -30,4 +30,3 @@ const Editor = (vueConstructor: any): EditorCtr => {
   };
 };
 
-export default Editor;

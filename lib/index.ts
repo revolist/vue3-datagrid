@@ -1,13 +1,14 @@
 import { defineAsyncComponent } from 'vue';
 import { defineCustomElements } from '@revolist/revogrid/loader';
 import { RevoGrid } from './revogrid';
+export { type EditorType } from './editor.adapter';
 export type * from '@revolist/revogrid';
 
 export {
   default as VGridVueTemplate,
   VueTemplateConstructor as VGridVueTemplateConstructor,
 } from './renderer';
-export { default as VGridVueEditor } from './editor';
+export { Editor as VGridVueEditor } from './editor';
 
 // Function to check if an object is a promise
 function checkPromise(obj: any): obj is Promise<void> {
