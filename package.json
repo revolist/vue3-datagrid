@@ -68,7 +68,7 @@
     "@revolist/revogrid": "4.0.41"
   },
   "devDependencies": {
-    "@stencil/core": "^4.18.3",
+    "@stencil/core": "^4.19.2",
     "@vitejs/plugin-vue": "^5.0.5",
     "@vitejs/plugin-vue-jsx": "^4.0.0",
     "typescript": "^5.2.2",
