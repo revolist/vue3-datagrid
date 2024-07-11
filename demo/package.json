@@ -10,7 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@revolist/vue3-datagrid": "4.0.50",
+    "@revolist/vue3-datagrid": "^4.0.52",
     "vue": "^3.4.21"
   },
   "devDependencies": {

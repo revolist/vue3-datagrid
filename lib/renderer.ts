@@ -2,7 +2,6 @@ import { HyperFunc, ColumnDataSchemaModel, VNode } from '@revolist/revogrid';
 import {
   ComponentPublicInstance,
   createVNode,
-  DefineComponent,
   render,
   getCurrentInstance,
   ComponentInternalInstance,
@@ -18,6 +17,8 @@ function setupAppContext(component: VueVNode, app: ComponentInternalInstance | n
   component.appContext = app.appContext;
 }
 
+type CreateVNodeParameters = (Parameters<typeof createVNode>)[0];
+
 /**
  * Convert Vue component to VNode and render it into HTMLElement.
  *
@@ -29,7 +30,7 @@ function setupAppContext(component: VueVNode, app: ComponentInternalInstance | n
  * @returns Vue instance, destroy method and HTMLElement
  */
 export const VueTemplateConstructor = (
-  vueConstructor: DefineComponent<any, any, any, any>,
+  vueConstructor:  CreateVNodeParameters,
   el: VueElement | null,
   p: Record<string, any>,
   vueInstance: ComponentInternalInstance | null,
@@ -64,21 +65,20 @@ export const VueTemplateConstructor = (
  * Render Vue component in Grid column template.
  */
 const Template = (
-  vueConstructor: DefineComponent<any, any, any, any>,
+  vueConstructor: CreateVNodeParameters,
   customProps?: any,
 ) => {
   const current = getCurrentInstance();
   return (h: HyperFunc<VNode>, p: ColumnDataSchemaModel, addition?: any) => {
-    const props = customProps ? { ...customProps, ...p } : p;
+    const props = customProps ? {  ...customProps, ...p, } : p;
     props.addition = addition;
     let lastEl = null;
-    return (
-      <span
-        ref={el => {
-          lastEl = VueTemplateConstructor(vueConstructor, el, props, current, lastEl);
-        }}
-      />
-    );
+    return h('span', {
+      key: `${p.prop}-${p.rowIndex}`,
+      ref: (el: VueElement) => {
+        lastEl = VueTemplateConstructor(vueConstructor, el, props, current, lastEl);
+      },
+    });
   };
 };
 

@@ -1,6 +1,5 @@
 import { defineConfig } from 'vite';
 import vuePlugin from '@vitejs/plugin-vue';
-import vueJsx from '@vitejs/plugin-vue-jsx';
 import { resolve } from 'path';
 import dts from 'vite-plugin-dts';
 
@@ -14,9 +13,6 @@ export default defineConfig({
           isCustomElement: tag => tag.includes('revo*'),
         },
       },
-    }),
-    vueJsx({
-      pragma: 'h', // h is requied by @revolist/revogrid to support tsx syntax
     }),
     dts({ rollupTypes: true, include: ['lib'] }),
   ],
@@ -48,12 +44,12 @@ export default defineConfig({
     },
   },
   // this is for local development
-  // server: {
-  //   open: '/demo/index.html',
-  // },
-  // resolve: {
-  //   alias: {
-  //     '@revolist/vue3-datagrid': resolve(__dirname, './lib'),
-  //   }
-  // }
+  server: {
+    open: '/demo/index.html',
+  },
+  resolve: {
+    alias: {
+      '@revolist/vue3-datagrid': resolve(__dirname, './lib'),
+    }
+  }
 });

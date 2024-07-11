@@ -22,9 +22,10 @@ export function generateFakeDataObject(
   rowsNumber: number,
   colsNumber: number,
   cellTemplate: any,
+  editorName: string
 ) {
   const result: any[] = [];
-  const columns: Record<number, ColumnRegular> = {};
+  const columns: ColumnRegular[] = [];
   const all = colsNumber * rowsNumber;
   for (let j = 0; j < all; j++) {
     let col = j % colsNumber;
@@ -40,8 +41,11 @@ export function generateFakeDataObject(
         cellTemplate,
         cellCompare: col % 2 == 0 ? naturalSort : undefined,
       };
+      // set editor for first column
       if (col === 0) {
-        columns[col].editor = 'button';
+        columns[col].name = `Custom Editor`;
+        columns[col].size = 300;
+        columns[col].editor = editorName;
       }
     }
     result[row][col] = row + ':' + col;

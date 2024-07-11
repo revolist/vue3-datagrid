@@ -1,6 +1,6 @@
 {
   "name": "@revolist/vue3-datagrid",
-  "version": "4.0.50",
+  "version": "4.0.52",
   "description": "Vue 3 DataGrid Spreadsheet component with native Vue 3 cell render support",
   "main": "./dist/vue3-datagrid.umd.cjs",
   "module": "./dist/vue3-datagrid.js",
@@ -70,7 +70,6 @@
   "devDependencies": {
     "@stencil/core": "^4.19.2",
     "@vitejs/plugin-vue": "^5.0.5",
-    "@vitejs/plugin-vue-jsx": "^4.0.0",
     "typescript": "^5.2.2",
     "vite": "^5.3.1",
     "vite-plugin-dts": "^3.9.1",

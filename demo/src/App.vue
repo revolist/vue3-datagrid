@@ -27,11 +27,12 @@ import { generateFakeDataObject } from './dataService';
 const count = ref(0)
 provide('read-only-count', readonly(count));
 
+const EDITOR_NAME = 'button';
 const cellTemplate = VGridVueTemplate(Cell);
-const { source, headers } = { ...generateFakeDataObject(1000, 1000, cellTemplate) };
+const { source, headers } = { ...generateFakeDataObject(500, 200, cellTemplate, EDITOR_NAME) };
 
 const button = VGridVueEditor(Editor);
-const gridEditors: Editors = { button };
+const gridEditors: Editors = { [EDITOR_NAME]: button };
 
 // For testing events
 function testCustomCellAction(e: CustomEvent) {

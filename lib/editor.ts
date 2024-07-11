@@ -1,4 +1,4 @@
-import { ColumnDataSchemaModel, EditCell, EditorCtr, SaveData } from '@revolist/revogrid';
+import { ColumnDataSchemaModel, EditorCtr, SaveData } from '@revolist/revogrid';
 import { getCurrentInstance } from 'vue';
 import { VueEditorAdapter } from './editor.adapter';
 
