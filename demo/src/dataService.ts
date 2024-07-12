@@ -38,13 +38,13 @@ export function generateFakeDataObject(
         name: generateHeader(col),
         prop: col,
         sortable: true,
-        cellTemplate,
         cellCompare: col % 2 == 0 ? naturalSort : undefined,
       };
       // set editor for first column
       if (col === 0) {
-        columns[col].name = `Custom Editor`;
+        columns[col].name = `Custom`;
         columns[col].size = 300;
+        columns[col].cellTemplate = cellTemplate;
         columns[col].editor = editorName;
       }
     }

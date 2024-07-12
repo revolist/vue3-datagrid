@@ -1,5 +1,5 @@
 <template>
-  <div ref="cell" :style="{ backgroundColor: color }" @click="customCellClickEvent">{{ rowIndex }}</div>
+  <div ref="cell" :style="{ backgroundColor: color }" @click="customCellClickEvent">{{ value }}</div>
 </template>
 
 <script lang="ts" setup>
