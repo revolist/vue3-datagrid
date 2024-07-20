@@ -2,7 +2,7 @@ import { defineAsyncComponent } from 'vue';
 import { defineCustomElements } from '@revolist/revogrid/loader';
 import { RevoGrid } from './revogrid';
 export { type EditorType } from './editor.adapter';
-export type * from '@revolist/revogrid';
+export * from '@revolist/revogrid';
 
 export {
   default as VGridVueTemplate,
