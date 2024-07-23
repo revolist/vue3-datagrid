@@ -1,4 +1,4 @@
-import { HyperFunc, ColumnDataSchemaModel, VNode } from '@revolist/revogrid';
+import { HyperFunc, ColumnDataSchemaModel, VNode, ColumnTemplateProp } from '@revolist/revogrid';
 import {
   ComponentPublicInstance,
   createVNode,
@@ -69,12 +69,12 @@ const Template = (
   customProps?: any,
 ) => {
   const current = getCurrentInstance();
-  return (h: HyperFunc<VNode>, p: ColumnDataSchemaModel, addition?: any) => {
+  return (h: HyperFunc<VNode>, p: ColumnDataSchemaModel | ColumnTemplateProp, addition?: any) => {
     const props = customProps ? {  ...customProps, ...p, } : p;
     props.addition = addition;
     let lastEl = null;
     return h('span', {
-      key: `${p.prop}-${p.rowIndex}`,
+      key: `${p.prop}-${p.rowIndex || 0}`,
       ref: (el: VueElement) => {
         lastEl = VueTemplateConstructor(vueConstructor, el, props, current, lastEl);
       },

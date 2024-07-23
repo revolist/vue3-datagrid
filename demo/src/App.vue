@@ -22,6 +22,7 @@ import Grid, { VGridVueEditor, VGridVueTemplate, type Editors } from '@revolist/
 
 import Editor from './Editor.vue';
 import Cell from './Cell.vue';
+import Header from './Header.vue';
 import { generateFakeDataObject } from './dataService';
 
 const count = ref(0)
@@ -29,7 +30,8 @@ provide('read-only-count', readonly(count));
 
 const EDITOR_NAME = 'button';
 const cellTemplate = VGridVueTemplate(Cell);
-const { source, headers } = { ...generateFakeDataObject(500, 200, cellTemplate, EDITOR_NAME) };
+const columnTemplate = VGridVueTemplate(Header);
+const { source, headers } = { ...generateFakeDataObject(500, 200, cellTemplate, columnTemplate, EDITOR_NAME) };
 
 const button = VGridVueEditor(Editor);
 const gridEditors: Editors = { [EDITOR_NAME]: button };

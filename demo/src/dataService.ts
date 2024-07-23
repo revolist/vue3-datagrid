@@ -22,6 +22,7 @@ export function generateFakeDataObject(
   rowsNumber: number,
   colsNumber: number,
   cellTemplate: any,
+  headerTemplate: any,
   editorName: string
 ) {
   const result: any[] = [];
@@ -44,6 +45,7 @@ export function generateFakeDataObject(
       if (col === 0) {
         columns[col].name = `Custom`;
         columns[col].size = 300;
+        columns[col].columnTemplate = headerTemplate;
         columns[col].cellTemplate = cellTemplate;
         columns[col].editor = editorName;
       }
