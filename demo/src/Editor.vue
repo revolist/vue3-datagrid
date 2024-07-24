@@ -5,6 +5,9 @@
 import { defineComponent } from 'vue';
 export default defineComponent({
   props: ['rowIndex', 'model', 'save', 'close'],
+  mounted() {
+    this.componentDidRender();
+  },
   methods: {
     onBtn(e: MouseEvent) {
       const event = new CustomEvent('cell', {
@@ -16,6 +19,9 @@ export default defineComponent({
       if (typeof this.close === 'function') {
         (this.close as () => void)();
       }
+    },
+    componentDidRender() {
+      console.log('Component has rendered');
     },
   },
 });
