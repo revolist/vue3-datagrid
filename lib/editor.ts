@@ -15,6 +15,7 @@ export const Editor = (vueConstructor: any): EditorCtr => {
    * @param close function to close editor
    * @returns editor instance
    */
+  const instance = getCurrentInstance();
   return function (
     column: ColumnDataSchemaModel,
     save: (value: SaveData, preventFocus?: boolean) => void,
@@ -25,7 +26,7 @@ export const Editor = (vueConstructor: any): EditorCtr => {
       column,
       save,
       close,
-      getCurrentInstance(),
+      instance,
     );
   };
 };
