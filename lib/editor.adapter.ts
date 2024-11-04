@@ -3,13 +3,12 @@ import {
   ComponentPublicInstance,
   DefineComponent,
 } from 'vue';
-import {
+import type {
   EditCell,
   ColumnDataSchemaModel,
   HyperFunc,
   VNode,
   EditorBase,
-  SaveData,
 } from '@revolist/revogrid';
 import { VueTemplateConstructor } from './renderer';
 
@@ -18,7 +17,7 @@ import { VueTemplateConstructor } from './renderer';
  */
 export type EditorType = {
   column: ColumnDataSchemaModel;
-  save: (value: SaveData, preventFocus?: boolean) => void;
+  save: (value: any, preventFocus?: boolean) => void;
   close: (focusNext?: boolean) => void;
 } & Partial<EditCell>;
 
@@ -30,7 +29,7 @@ export class VueEditorAdapter implements EditorBase {
   constructor(
     private VueEditorConstructor: DefineComponent,
     public column: ColumnDataSchemaModel,
-    private save: (value: SaveData, preventFocus?: boolean) => void,
+    private save: (value: any, preventFocus?: boolean) => void,
     private close: (focusNext?: boolean) => void,
     private vInstance: ComponentInternalInstance | null,
   ) {}
