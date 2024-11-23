@@ -80,6 +80,7 @@ export const RevoGrid = /*@__PURE__*/ defineContainer<JSX.RevoGrid>('revo-grid',
   'aftergridrender',
   'aftergridinit',
   'additionaldatachanged',
-  'afterthemechanged'
+  'afterthemechanged',
+  'created'
 ]);
 
