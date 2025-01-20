@@ -2,6 +2,7 @@ import { defineAsyncComponent } from 'vue';
 import { defineCustomElements } from '@revolist/revogrid/loader';
 import { RevoGrid } from './revogrid';
 export { type EditorType } from './editor.adapter';
+export * from '@revolist/revogrid/loader';
 export * from '@revolist/revogrid';
 
 export {
