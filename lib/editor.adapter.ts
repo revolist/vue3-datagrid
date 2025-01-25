@@ -15,11 +15,11 @@ import { VueTemplateConstructor } from './renderer';
 /**
  * Data passed to editor
  */
-export type EditorType = {
+export interface EditorType extends Partial<EditCell> {
   column: ColumnDataSchemaModel;
   save: (value: any, preventFocus?: boolean) => void;
   close: (focusNext?: boolean) => void;
-} & Partial<EditCell>;
+}
 
 export class VueEditorAdapter implements EditorBase {
   public element: Element | null = null;
