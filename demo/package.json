@@ -1,7 +1,7 @@
 {
   "name": "lib-test",
   "description": "Demo lib test",
-  "version": "4.13.3",
+  "version": "4.13.4",
   "private": true,
   "type": "module",
   "scripts": {
@@ -10,7 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@revolist/vue3-datagrid": "4.13.3",
+    "@revolist/vue3-datagrid": "4.13.4",
     "vue": "^3.4.21"
   },
   "devDependencies": {
