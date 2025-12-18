@@ -7,9 +7,9 @@
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/vue3-datagrid.js",
-      "require": "./dist/vue3-datagrid.umd.cjs",
-      "types": "./dist/index.d.ts"
+      "require": "./dist/vue3-datagrid.umd.cjs"
     }
   },
   "type": "module",
@@ -71,8 +71,8 @@
     "@stencil/core": "^4.19.2",
     "@vitejs/plugin-vue": "^5.0.5",
     "typescript": "^5.2.2",
-    "vite": "^5.3.1",
-    "vite-plugin-dts": "^3.9.1",
+    "vite": "^7.3.0",
+    "vite-plugin-dts": "^4.5.4",
     "vue": "^3.4.29",
     "vue-tsc": "^2.0.14"
   },
