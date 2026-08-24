@@ -7,9 +7,7 @@
 <p align="center">
   <a href="https://www.npmjs.com/package/@revolist/revogrid"><img src="https://img.shields.io/npm/v/@revolist/revogrid" alt="Latest Version on NPM"/></a>
   <a href="https://github.com/revolist/revogrid/blob/master/LICENSE"><img src="https://img.shields.io/npm/l/@revolist/revogrid" alt="Software License"/></a>
-  <img src="https://badgen.net/bundlephobia/dependency-count/@revolist/revogrid" alt="Dependency count"/>
-  <img src="https://badgen.net/bundlephobia/tree-shaking/@revolist/revogrid" alt="Tree shaking"/>
-  <img src="https://img.shields.io/bundlephobia/min/@revolist/revogrid" alt="Bundle size"/>
+  <a href="https://www.npmjs.com/package/@revolist/revogrid"><img src="https://img.shields.io/npm/dm/@revolist/revogrid" alt="NPM downloads per month"/></a>
   <img src="https://sonarcloud.io/api/project_badges/measure?project=revolist_revogrid&metric=alert_status" alt="Sonar Quality Gate"/>
   <a href="https://github.com/revolist/revogrid/actions/workflows/unit.yml">
         <img src="https://github.com/revolist/revogrid/actions/workflows/unit.yml/badge.svg" alt="Workflow status badge" loading="lazy" height="20">
@@ -56,7 +54,7 @@ Used by some of the largest companies in Europe and the United States.
   - Seamless copy/paste from Excel, Google Sheets, or any other sheet format.
 
 
-- **Lightweight**: Minimal initial bundle size ![Min size](https://badgen.net/bundlephobia/min/@revolist/revogrid@latest). Can be imported with polyfills or as a module for modern browsers.
+- **Lightweight**: Minimal initial bundle size. Can be imported with polyfills or as a module for modern browsers.
 
 - **[Intelligent Virtual DOM](https://rv-grid.com/guide/overview#VNode-Reactive-DOM)**: Smart row recombination to minimize redraws.
 
@@ -76,6 +74,40 @@ Used by some of the largest companies in Europe and the United States.
   - Header filtering.
   - Custom filters to extend system filters with your own set.
 
+  Blank filters preserve source-value identity and own-property presence. By default,
+  `null`, owned `undefined`, exactly `""`, and missing own properties are blank;
+  whitespace-only strings, `false`, `0`, `NaN`, arrays, and objects are not. The
+  policy can be configured at grid level and overridden field-by-field per column
+  with `blankSemantics`. Existing saved `empty` and `notEmpty` operator IDs remain
+  compatible and are labeled “Is blank” and “Is not blank.”
+
+  ```ts
+  const filter = {
+    blankSemantics: {
+      whitespaceOnlyString: true,
+      emptyArray: true,
+      isBlank(value, context, fallbackResult) {
+        return value === 'N/A' || fallbackResult;
+      },
+    },
+  };
+
+  const columns = [{
+    prop: 'tags',
+    filter: 'array',
+    // Partial column policy; other fields inherit the grid policy.
+    blankSemantics: { emptyArray: false },
+  }];
+  ```
+
+  An inherited property counts as missing. A `cellParser` supplies the value for
+  ordinary comparisons but does not replace the raw value used for blank checks.
+  The callback receives the source value, row model, column, property, parsed
+  value, own-property status, effective policy, and fallback result. “Is not
+  blank” is the exact inverse of the resolved blank predicate. Typed operators
+  remain strict; blank configuration never normalizes `false`, `0`, or arrays
+  into another source value.
+
 - **[Export](https://rv-grid.com/guide/export.plugin)**:
   - **[CSV](https://rv-grid.com/guide/export.plugin)**: Built-in file export for core RevoGrid data workflows.
   - **[PDF](https://rv-grid.com/guide/pdf-export)**: Browser-side PDF export with the lightweight [`@revolist/revogrid-pdf-export`](https://www.npmjs.com/package/@revolist/revogrid-pdf-export) plugin.
@@ -84,6 +116,7 @@ Used by some of the largest companies in Europe and the United States.
 - **Custom Sizes**: Define custom sizes for [columns](https://rv-grid.com/guide/column/#Column-Size) and [rows](https://rv-grid.com/guide/row/height). Automatic sizing based on content.
 
 - **[Column Resizing](https://rv-grid.com/guide/column/resize)**: Adjust column widths.
+- **[Row Resizing](https://rv-grid.com/guide/row/resize)**: Resize from row-header edges or enable full-row resize edges with optional height limits.
 - **Auto Size Columns**: Intelligent column width adjustment that automatically adapts to content, ensuring optimal readability and layout efficiency.
 
 - **Pinned/Sticky/Freezed Elements**:
@@ -409,7 +442,9 @@ export default defineComponent({
 - [![React](./assets/react.svg) React](https://rv-grid.com/guide/react/)
 - [![Angular](./assets/angular.svg) Angular](https://rv-grid.com/guide/angular/)
 - [![Svelte](./assets/svelte.svg) Svelte](https://rv-grid.com/guide/svelte/)
+- [![Python](./assets/python.svg) Dash / Python](https://rv-grid.com/guide/dash/)
 - [![JavaScript](./assets/js.svg) JavaScript](https://rv-grid.com/guide/)
+
 
 ## Versions
 
@@ -469,8 +504,8 @@ Thank you for supporting RevoGrid! 🙏
 
 ## Testing
 
-[![Unit Tests](https://github.com/revolist/revogrid/actions/workflows/ci-unit.yml/badge.svg?branch=main)](https://github.com/revolist/revogrid/actions/workflows/ci-unit.yml)
-[![E2E Tests](https://github.com/revolist/revogrid/actions/workflows/ci-e2e.yml/badge.svg?branch=main)](https://github.com/revolist/revogrid/actions/workflows/ci-e2e.yml)
+[![Unit Tests](https://github.com/revolist/revogrid/actions/workflows/unit.yml/badge.svg?branch=main)](https://github.com/revolist/revogrid/actions/workflows/unit.yml)
+[![E2E Tests](https://github.com/revolist/revogrid/actions/workflows/e2e.yml/badge.svg?branch=main)](https://github.com/revolist/revogrid/actions/workflows/e2e.yml)
 
 RevoGrid is thoroughly tested to ensure reliability and stability.
 
