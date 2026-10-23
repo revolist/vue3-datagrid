@@ -64,17 +64,17 @@ export const VueTemplateConstructor = (
 /**
  * Render Vue component in Grid column template.
  */
-const Template = (
+const Template = <C = ColumnDataSchemaModel | ColumnTemplateProp>(
   vueConstructor: CreateVNodeParameters,
   customProps?: any,
+  options?: { props?: (context: C) => Record<string, any>; key?: (context: C) => string | number },
+  current = getCurrentInstance(),
 ) => {
-  const current = getCurrentInstance();
-  return (h: HyperFunc<VNode>, p: ColumnDataSchemaModel | ColumnTemplateProp, addition?: any) => {
-    const props = customProps ? {  ...customProps, ...p, } : p;
-    props.addition = addition;
+  return (h: HyperFunc<VNode>, p: C, addition?: any) => {
+    const props = options?.props ? options.props(p) : { ...customProps, ...p, addition };
     let lastEl = null;
     return h('span', {
-      key: `${p.prop}-${p.rowIndex || 0}`,
+      key: options?.key?.(p) ?? `${(p as any).prop}-${(p as any).rowIndex || 0}`,
       ref: (el: VueElement) => {
         lastEl = VueTemplateConstructor(vueConstructor, el, props, current, lastEl);
       },

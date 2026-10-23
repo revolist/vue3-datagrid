@@ -1,82 +1,54 @@
-import { createApp, defineComponent, h, inject, nextTick, onUnmounted, provide, ref } from 'vue';
+import { createApp, defineComponent, h, inject, nextTick, onUnmounted, ref } from 'vue';
 import { describe, expect, it, vi } from 'vitest';
-import { RevoTemplateOutlet, useTemplates, type VueTemplateOwner } from '../lib/component-template';
+import { useTemplates, type VueTemplateOwner } from '../lib/component-template';
+import LegacyTemplate from '../lib/renderer';
 
-function fixture() {
-  let owner!: VueTemplateOwner;
-  const label = ref('nearby');
-  const unmounted = vi.fn();
-  const Child = defineComponent({
-    props: ['context', 'optional'],
-    setup(props) {
+describe('thin Vue template helper', () => {
+  it('reuses the cell renderer, app context, mapped props and normal ref cleanup', async () => {
+    let templates!: VueTemplateOwner;
+    let legacy!: ReturnType<typeof LegacyTemplate>;
+    const label = ref('app');
+    const unmounted = vi.fn();
+    const Child = defineComponent({ props: ['context', 'optional'], setup(props) {
       const provided = inject<any>('label');
+      const count = ref(0);
       onUnmounted(unmounted);
-      return () => h('button', `${provided.value}:${props.context.value}:${props.optional ?? 'absent'}`);
-    },
-  });
-  const App = defineComponent({ setup() {
-    provide('label', label);
-    owner = useTemplates();
-    return () => h(RevoTemplateOutlet, { owner });
-  } });
-  const root = document.createElement('div');
-  const host = document.createElement('div');
-  document.body.append(root, host);
-  const app = createApp(App);
-  app.mount(root);
-  return { owner, label, Child, app, root, host, unmounted };
-}
-
-describe('Vue templates', () => {
-  it('inherits nearby reactive providers and replaces props including removed keys', async () => {
-    const f = fixture();
-    const template = f.owner.template<{ value: number; optional?: string }>(f.Child, {
-      props: context => ({ context, ...(context.optional ? { optional: context.optional } : {}) }),
-    });
-    const instance = template.mount(f.host, { value: 1, optional: 'yes' });
+      return () => h('button', { onClick: () => count.value++ }, `${provided.value}:${props.context.value}:${props.optional ?? 'absent'}:${count.value}`);
+    } });
+    const app = createApp(defineComponent({ setup() {
+      templates = useTemplates();
+      legacy = LegacyTemplate(Child, { context: { value: 9 } });
+      return () => h('div');
+    } }));
+    app.provide('label', label);
+    const root = document.createElement('div');
+    const host = document.createElement('span');
+    document.body.append(root, host);
+    app.mount(root);
+    const template = templates.template<{ value: number; optional?: string }>(Child, { props: context => ({ context, optional: context.optional }) });
+    const vnode = (context: { value: number; optional?: string }) => template(((_tag: any, attrs: any) => attrs) as any, context) as any;
+    vnode({ value: 1, optional: 'yes' }).ref(host);
     await nextTick();
-    expect(f.host.textContent).toBe('nearby:1:yes');
-    f.label.value = 'updated';
-    instance.update({ value: 2 });
+    expect(host.textContent).toBe('app:1:yes:0');
+    const cachedVNode = (host as any)._vnode;
+    host.querySelector('button')!.click();
+    label.value = 'updated';
+    const current = vnode({ value: 2 });
+    current.ref(host);
     await nextTick();
-    expect(f.host.textContent).toBe('updated:2:absent');
-    expect(f.unmounted).not.toHaveBeenCalled();
-    instance.destroy(); instance.destroy();
+    expect(host.textContent).toBe('updated:2:absent:1');
+    expect((host as any)._vnode).toBe(cachedVNode);
+    expect(unmounted).not.toHaveBeenCalled();
+    current.ref(null);
+    current.ref(null);
     await nextTick();
-    expect(f.unmounted).toHaveBeenCalledTimes(1);
-    expect(f.host.textContent).toBe('');
-    f.app.unmount(); f.root.remove(); f.host.remove();
-  });
-
-  it('tracks reactive values read by mapped props inside the owning Vue render', async () => {
-    const f = fixture();
-    const optional = ref<string | undefined>('present');
-    const template = f.owner.template<{ value: number }>(f.Child, {
-      props: context => ({ context, ...(optional.value ? { optional: optional.value } : {}) }),
-    });
-    template.mount(f.host, { value: 1 });
+    expect(unmounted).toHaveBeenCalledTimes(1);
+    expect(host.textContent).toBe('');
+    const old = legacy(((_tag: any, attrs: any) => attrs) as any, { prop: 'name', rowIndex: 0 } as any) as any;
+    old.ref(host);
     await nextTick();
-    expect(f.host.textContent).toBe('nearby:1:present');
-    optional.value = undefined;
-    await nextTick();
-    expect(f.host.textContent).toBe('nearby:1:absent');
-    f.app.unmount(); f.root.remove(); f.host.remove();
-  });
-
-  it('cancels pending mounts and makes owner disposal final', async () => {
-    const f = fixture();
-    const template = f.owner.template(f.Child);
-    const pending = template.mount(f.host, { value: 1 });
-    pending.destroy();
-    await nextTick();
-    expect(f.host.childElementCount).toBe(0);
-    template.mount(f.host, { value: 2 });
-    await nextTick();
-    f.app.unmount();
-    await nextTick();
-    expect(f.host.childElementCount).toBe(0);
-    expect(f.unmounted).toHaveBeenCalledTimes(1);
-    expect(() => template.mount(f.host, {})).toThrow('disposed');
-    f.root.remove(); f.host.remove();
+    expect(host.textContent).toBe('updated:9:absent:0');
+    old.ref(null);
+    app.unmount();root.remove();host.remove();
   });
 });

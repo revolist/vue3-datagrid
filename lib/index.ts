@@ -27,4 +27,4 @@ export const VGrid = defineAsyncComponent(async () => {
 
 export default VGrid;
 
-export { useTemplates, RevoTemplateOutlet, type VueTemplateOwner } from './component-template';
+export { useTemplates, type VueTemplateOwner } from './component-template';

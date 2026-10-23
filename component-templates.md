@@ -1,48 +1,22 @@
-# Vue component templates
+# Framework content templates
 
-Call `useTemplates()` during setup and render exactly one `RevoTemplateOutlet`
-with that owner beneath the providers your templates should inherit. Put the
-outlet before the grid in sibling render order. Vue Teleport keeps the normal
-logical component ancestry. No new Vue application is created per template.
+`useTemplates()` is a thin wrapper around the existing framework `Template` factory. It returns ordinary template callbacks for cells, master rows, Kanban cards, and Gantt labels. There is no outlet or separate mounting protocol.
 
-```vue
-<script setup lang="ts">
-import { RevoTemplateOutlet, useTemplates } from '@revolist/vue3-datagrid';
-import { asCellTemplate, type CellTemplateContext } from '@revolist/revogrid';
-import type { BeforeRowRenderEvent } from '@revolist/revogrid';
-import type { KanbanCardRenderContext } from '@revolist/kanban';
-import type { GanttTaskBarVisualContext } from '@revolist/gantt';
-import Cell from './Cell.vue';
-import Detail from './Detail.vue';
-import Card from './Card.vue';
-import BarLabel from './BarLabel.vue';
+```ts
+import { useTemplates } from '@revolist/vue3-datagrid';
+import type { CellTemplateProp } from '@revolist/revogrid';
 
 const templates = useTemplates();
-const vueTemplate = templates.template;
-const columns = [{ prop: 'name', cellTemplate: asCellTemplate(
-  vueTemplate<CellTemplateContext>(Cell), { key: p => p.model.id },
-) }];
-const masterRow = { template: vueTemplate<BeforeRowRenderEvent>(Detail) };
-const kanbanCustomization = { cardContent: vueTemplate<KanbanCardRenderContext>(Card) };
-const ganttVisuals = { taskBarContent: vueTemplate<GanttTaskBarVisualContext>(BarLabel) };
-</script>
-<template>
-  <RevoTemplateOutlet :owner="templates" />
-  <!-- Pass columns/masterRow/kanbanCustomization/ganttVisuals to the product. -->
-</template>
+const content = templates.template<CellTemplateProp>(MyCell, {
+  props: context => ({ item: context.model }),
+  key: context => context.model.id,
+});
 ```
 
-Components receive a `context` prop. For existing component interfaces, pass
-`{ props: context => ({ item: context.card, onSave: save }) }` as the helper's
-second argument. Prop mapping replaces the complete props object; omitted props
-are removed. Create definitions once during setup, not during every render.
+Without `props`, the component receives a `context` prop/input. The optional `key` selects record identity when hosts are reused. Supply a stable key for cells whose records may reorder. Mapped props are recomputed when the product invokes the callback. To clear a prop, explicitly pass `undefined`; Vue retains the legacy renderer’s behavior for omitted keys.
 
-Offscreen components unmount; keep durable edits in application state. Master
-expansion state remains in the product. Gantt content replaces labels while
-retaining progress and interaction controls; the legacy taskBarContentHook wins
-if both are set. Existing callback APIs are unchanged. Exports continue using
-default product data/appearance, not the custom Vue content.
+Use the returned callback directly as `column.cellTemplate`, `masterRow.template`, `customization.cardContent`, or `gantt.visuals.taskBarContent`. Product progress, resize, dependency, selection and drag controls remain outside the custom content. The legacy Gantt content hook takes precedence. Exports retain the default product representation.
 
-Owner disposal releases mounted and pending entries. Imports are SSR-safe;
-rendering into product hosts is browser-only. React and Angular adapters are
-not included in this package.
+Vue templates retain the existing renderer’s app-level provide/inject behavior. Nearby component providers do not automatically cross the separate render root.
+
+Normal ref teardown releases components when hosts leave the viewport or the grid is removed. Existing `Template` and editor signatures remain available; their default cell prop shape is unchanged.

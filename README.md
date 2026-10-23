@@ -562,5 +562,5 @@ MIT
 ### Component templates across products
 
 See [component templates](./component-templates.md) for `useTemplates`,
-`RevoTemplateOutlet`, and typed content integration with cells, master details,
+typed content integration with cells, master details,
 Kanban cards, and Gantt bars. Existing `VGridVueTemplate` remains supported.
